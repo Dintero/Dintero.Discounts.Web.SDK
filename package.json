@@ -1,34 +1,43 @@
 {
-  "name": "@dintero/discounts-web-sdk",
-  "version": "0.1.0",
-  "description": "Dintero Discounts SDK for web frontends",
-  "main": "dist/dintero-discounts-web-sdk.cjs.js",
-  "module": "dist/dintero-discounts-web-sdk.esm.js",
-  "umd:main": "dist/dintero-discounts-web-sdk.umd.min.js",
-  "unpkg": "dist/dintero-discounts-web-sdk.umd.min.js",
-  "types": "dist/dintero-discounts-web-sdk.cjs.d.ts",
-  "preconstruct": {
-    "umdName": "discounts"
-  },
-  "scripts": {
-    "test": "karma start",
-    "build": "preconstruct build"
-  },
-  "author": "Sven Nicolai Viig <sven@dintero.com> (https://dintero.com)",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/preset-env": "^7.14.1",
-    "@babel/preset-typescript": "^7.13.0",
-    "@preconstruct/cli": "^2.1.0",
-    "chai": "^4.2.0",
-    "karma": "^5.1.1",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-mocha": "^2.0.1",
-    "karma-typescript": "^5.0.3",
-    "mocha": "^8.1.1",
-    "prettier": "^1.19.1",
-    "puppeteer": "^2.1.0",
-    "typescript": "^4.2.4"
-  }
+    "name": "@dintero/discounts-web-sdk",
+    "version": "0.0.1",
+    "description": "Dintero Discounts SDK for web frontends",
+    "main": "dist/dintero-discounts-web-sdk.cjs.js",
+    "module": "dist/dintero-discounts-web-sdk.esm.js",
+    "umd:main": "dist/dintero-discounts-web-sdk.umd.min.js",
+    "unpkg": "dist/dintero-discounts-web-sdk.umd.min.js",
+    "types": "dist/dintero-discounts-web-sdk.cjs.d.ts",
+    "preconstruct": {
+        "umdName": "discounts"
+    },
+    "scripts": {
+        "test": "karma start",
+        "build": "preconstruct build"
+    },
+    "private": false,
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Dintero/Dintero.Discounts.Web.SDK.git"
+   },
+    "homepage": "https://github.com/Dintero/Dintero.Discounts.Web.SDK#readme",
+    "author": "Sven Nicolai Viig <sven@dintero.com> (https://dintero.com)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Dintero/Dintero.Discounts.Web.SDK/issues"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.14.1",
+        "@babel/preset-typescript": "^7.13.0",
+        "@preconstruct/cli": "^2.1.0",
+        "chai": "^4.2.0",
+        "karma": "^5.1.1",
+        "karma-chai": "^0.1.0",
+        "karma-chrome-launcher": "^3.1.0",
+        "karma-mocha": "^2.0.1",
+        "karma-typescript": "^5.0.3",
+        "mocha": "^8.1.1",
+        "prettier": "^1.19.1",
+        "puppeteer": "^2.1.0",
+        "typescript": "^4.2.4"
+    }
 }
