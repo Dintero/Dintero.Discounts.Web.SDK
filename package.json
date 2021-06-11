@@ -7,12 +7,14 @@
     "umd:main": "dist/dintero-discounts-web-sdk.umd.min.js",
     "unpkg": "dist/dintero-discounts-web-sdk.umd.min.js",
     "types": "dist/dintero-discounts-web-sdk.cjs.d.ts",
+    "files": ["/dist"],
     "preconstruct": {
         "umdName": "discounts"
     },
     "scripts": {
         "test": "karma start",
-        "build": "preconstruct build"
+        "build": "preconstruct build",
+        "prepack": "npm run build"
     },
     "private": false,
     "repository": {
