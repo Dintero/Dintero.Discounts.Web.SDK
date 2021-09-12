@@ -1,0 +1,38 @@
+name: tagged-release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  tagged_release:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: build and test
+        run: |
+          npm install
+          npm run build
+          npm run test
+      - name: package
+        run: npm pack
+      - name: Set Vars
+        run: |
+          UMD_MIN_SHA384="$(shasum -b -a 384 dist/dintero-discounts-web-sdk.umd.min.js | awk '{ print $1 }' | xxd -r -p | base64 | sed "s/^/sha384-/g")"
+          echo "UMD_MIN_SHA384=$UMD_MIN_SHA384" >> $GITHUB_ENV
+      - name: publish registry.npmjs.org
+        run: npm publish --access=public dintero-discounts-web-sdk-*.tgz
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          files: |
+            dintero-discounts-web-sdk-*.tgz

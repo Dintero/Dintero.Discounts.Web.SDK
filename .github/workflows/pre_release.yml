@@ -1,0 +1,32 @@
+name: pre-release
+
+on:
+  push:
+    branches: [ master ]
+    tags-ignore:
+      - "v*.*.*"
+
+jobs:
+  pre_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: build and test
+        run: |
+          npm install
+          npm run build
+          npm run test
+      - name: package
+        run: npm pack
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            dintero-discounts-web-sdk-*.tgz

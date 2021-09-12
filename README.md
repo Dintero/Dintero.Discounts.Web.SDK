@@ -146,10 +146,6 @@ npm run build
 
 ## Creating a new release checklist
 
-1. Bump the package version in `package.json`.
-2. Build `npm run build`
-3. Regenerate integrity hash and update the unpgk install instructions in this file `shasum -b -a 384 dist/dintero-checkout-web-sdk.umd.min.js | awk '{ print $1 }' | xxd -r -p | base64 | sed "s/^/sha384-/g"`
-4. Update README.md with new version/sha
-5. Publish new version to npm with `npm publish --access=public`.
-6. Tag and create release in Github
+1. Bump the package version and create PR `npm version patch`.
+2. Trigger release by tagging the version
    `git tag "v$(jq .version -r < package.json)"`
