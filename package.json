@@ -1,6 +1,6 @@
 {
     "name": "@dintero/discounts-web-sdk",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Dintero Discounts SDK for web frontends",
     "main": "dist/dintero-discounts-web-sdk.cjs.js",
     "module": "dist/dintero-discounts-web-sdk.esm.js",
