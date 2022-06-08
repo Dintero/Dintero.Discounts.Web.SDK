@@ -22,8 +22,8 @@ const discountStyle = (className: string, theme: Theme) => `
     box-shadow: rgb(212, 212, 213) 0px 1px 3px 0px, rgb(212, 212, 213) 0px 0px 0px 1px;
     border-radius: ${theme.borderRadius};
     text-align: center;
-    padding-top: 65px;
-    padding-bottom: 70px;
+    padding-top: 5px;
+    padding-bottom: 105px;
     padding-left: 5px;
     padding-right: 5px;
     max-width: 300px;
@@ -65,7 +65,7 @@ const imageStyle = (className: string) => `
 const ribbonTopStyle = (className: string, theme?: Theme) => `
 .${className} {
     position: absolute;
-    top: 10px;
+    bottom: 60px;
     left: -20px;
     color: #fff;
     z-index: 9;

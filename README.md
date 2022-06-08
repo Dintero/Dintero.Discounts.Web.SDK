@@ -17,7 +17,7 @@ npm install @dintero/discounts-web-sdk
 Load the Dintero Discounts SDK in a script tag on your site.
 
 ```html
-<script src="https://unpkg.com/@dintero/discounts-web-sdk@0.0.12/dist/dintero-discounts-web-sdk.umd.min.js" integrity="sha384-jjX8hv78QBpDqiTN7rQYF+O7SA8OFB4ay+KdSVyVOT5Z6T5a9U7kPQo8u3bUoyVb"></script>
+<script src="https://unpkg.com/@dintero/discounts-web-sdk@0.0.2/dist/dintero-discounts-web-sdk.umd.min.js" integrity="sha384-+8HbDRcGzOxlHcPs61rbbUk18Ktl8jr+/eXhiE0CQweS0SG2iTgW5xZfC+9ti96x"></script>
 ```
 
 ### Inline HTML JavaScript example getting a list of discounts with API access
@@ -148,7 +148,7 @@ npm run build
 
 1. Bump the package version in `package.json`.
 2. Build `npm run build`
-3. Regenerate integrity hash and update the unpgk install instructions in this file `shasum -b -a 384 dist/dintero-checkout-web-sdk.umd.min.js | awk '{ print $1 }' | xxd -r -p | base64 | sed "s/^/sha384-/g"`
+3. Regenerate integrity hash and update the unpgk install instructions in this file `shasum -b -a 384 dist/dintero-discounts-web-sdk.umd.min.js | awk '{ print $1 }' | xxd -r -p | base64 | sed "s/^/sha384-/g"`
 4. Update README.md with new version/sha
 5. Publish new version to npm with `npm publish --access=public`.
 6. Tag and create release in Github
