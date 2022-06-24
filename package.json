@@ -12,13 +12,15 @@
     },
     "scripts": {
         "test": "karma start",
-        "build": "preconstruct build"
+        "build": "preconstruct build",
+        "prepublishOnly": "npm run build",
+        "semantic-release": "semantic-release"
     },
     "private": false,
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/Dintero/Dintero.Discounts.Web.SDK.git"
-   },
+        "type": "git",
+        "url": "git+https://github.com/Dintero/Dintero.Discounts.Web.SDK.git"
+    },
     "homepage": "https://github.com/Dintero/Dintero.Discounts.Web.SDK#readme",
     "author": "Sven Nicolai Viig <sven@dintero.com> (https://dintero.com)",
     "license": "MIT",
@@ -29,6 +31,7 @@
         "@babel/preset-env": "^7.14.1",
         "@babel/preset-typescript": "^7.13.0",
         "@preconstruct/cli": "^2.1.0",
+        "@semantic-release/git": "^10.0.1",
         "chai": "^4.2.0",
         "karma": "^6.3.16",
         "karma-chai": "^0.1.0",
@@ -38,6 +41,7 @@
         "mocha": "^8.1.1",
         "prettier": "^2.7.0",
         "puppeteer": "^2.1.0",
+        "semantic-release": "^19.0.3",
         "typescript": "^4.2.4"
     }
 }

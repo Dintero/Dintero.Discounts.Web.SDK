@@ -23,11 +23,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install
-          yarn run test
+          npm install
+          npm run test
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-        run: yarn run semantic-release
+        run: npm run semantic-release --dry-run
