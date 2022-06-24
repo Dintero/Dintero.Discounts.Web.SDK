@@ -18,7 +18,8 @@ npm install @dintero/discounts-web-sdk
 
 In this example the SDK will try to fetch data from the discount service.
 
-Make sure to configure the plugin with an API client that only has grants giving access to the `public:discounts`-scope.
+Make sure to configure the plugin with an API client that only has grants giving access to the
+`public:discounts` scope.
 
 ```html
 <script type="text/javascript">
