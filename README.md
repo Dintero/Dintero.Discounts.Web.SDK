@@ -1,5 +1,7 @@
 # Dintero Discounts JavaScript SDK for frontend applications
 
+[![Build Status](https://github.com/dintero/Dintero.Discounts.Web.SDK/workflows/CI/badge.svg)](https://github.com/dintero/Dintero.Discounts.Web.SDK/actions?query=workflow%3ACI+branch%3Amaster) [![npm latest version](https://img.shields.io/npm/v/@dintero/discounts-web-sdk/latest.svg)](https://www.npmjs.com/package/@dintero/discounts-web-sdk)
+
 Use this SDK in your frontend application to embed one or more discounts from the Dintero Discount Service service in your webpage.
 
 [Learn more about the Dintero Discount Service at docs.dintero.com](https://docs.dintero.com/docs/discount-service/)
@@ -10,14 +12,6 @@ Use this SDK in your frontend application to embed one or more discounts from th
 
 ```
 npm install @dintero/discounts-web-sdk
-```
-
-**unpkg**
-
-Load the Dintero Discounts SDK in a script tag on your site.
-
-```html
-<script src="https://unpkg.com/@dintero/discounts-web-sdk@0.0.2/dist/dintero-discounts-web-sdk.umd.min.js" integrity="sha384-+8HbDRcGzOxlHcPs61rbbUk18Ktl8jr+/eXhiE0CQweS0SG2iTgW5xZfC+9ti96x"></script>
 ```
 
 ### Inline HTML JavaScript example getting a list of discounts with API access
@@ -144,12 +138,9 @@ npm install
 npm run build
 ```
 
-## Creating a new release checklist
+### Creating a new release
 
-1. Bump the package version in `package.json`.
-2. Build `npm run build`
-3. Regenerate integrity hash and update the unpgk install instructions in this file `shasum -b -a 384 dist/dintero-discounts-web-sdk.umd.min.js | awk '{ print $1 }' | xxd -r -p | base64 | sed "s/^/sha384-/g"`
-4. Update README.md with new version/sha
-5. Publish new version to npm with `npm publish --access=public`.
-6. Tag and create release in Github
-   `git tag "v$(jq .version -r < package.json)"`
+1. Enforce all commits to the master branch to be formatted according to the
+   [Angular Commit Message Format](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format)
+2. When merged to master, it will automatically be released with
+   [semantic-release](https://github.com/semantic-release/semantic-release)
