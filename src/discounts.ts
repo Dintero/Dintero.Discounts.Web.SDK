@@ -4,6 +4,8 @@ import { translations, t } from "./translations";
 import { monetaryString, dateString } from "./formatters";
 import { normalize } from "./normalize";
 
+export const containsWebShopLink = (discount: Discount) => discount.links && discount.links.some(x => x.rel && x.rel === 'webshop');
+
 const discountStyle = (className: string, theme: Theme) => `
 @keyframes appear {
     from {
@@ -35,6 +37,8 @@ const discountStyle = (className: string, theme: Theme) => `
     animation-name: appear;
     animation-timing-function: ease-in;
     transform-origin: top center;
+    color: inherit;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 679px) {
@@ -298,17 +302,10 @@ export const createDiscount = (
     discount: Discount,
     configuration: Configuration
 ): HTMLElement => {
-    const containsWebShopLink = discount.links && discount.links.some(x => x.rel && x.rel === 'webshop');
-    const webShopLink = discount.links && discount.links.find(x => x.rel && x.rel === 'webshop');
     const discountElem = createElement({
-        tag: containsWebShopLink ? "a" : "div",
+        tag: containsWebShopLink(discount) ? "a" : "div",
         styles: [normalize, discountStyle],
-        theme: configuration.theme,
-        ...(containsWebShopLink && {attributes: [
-            {
-                'href': webShopLink.href,
-            }
-        ]}),
+        theme: configuration.theme
     });
     const ribbonTop = createTopRibbon(discount, configuration);
     const ribbonBottom = createBottomRibbon(discount, configuration);

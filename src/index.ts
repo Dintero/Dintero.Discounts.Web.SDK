@@ -1,4 +1,4 @@
-import { createDiscount } from "./discounts";
+import { containsWebShopLink, createDiscount } from "./discounts";
 import { Discount, Configuration, Theme, Embed } from "./types";
 import { createElement } from "./dom";
 import { fetchDiscounts } from "./fetch";
@@ -76,7 +76,7 @@ export const embed = async (configuration: Configuration):Promise<Embed> => {
         return renderDeals(_configuration, _configuration.discounts);
     } else {
 
-        const loader =createLoading(_configuration);
+        const loader = createLoading(_configuration);
         try{
             configuration.container.appendChild(loader);
             const discounts = await fetchDiscounts(_configuration);
@@ -99,6 +99,10 @@ const renderDeals = (configuration: Configuration, discounts: Discount[]):Embed 
     const wrapper = createElement({ tag: "div", styles: [normalize, wrapperStyles], theme: configuration.theme });
     discounts.forEach((discount) => {
         const elem = createDiscount(discount, configuration);
+        if (containsWebShopLink(discount)) {
+            elem.setAttribute('target', '_blank');
+            elem.setAttribute('href', discount.links.find(x => x.rel === 'webshop').href);
+        }
         wrapper.appendChild(elem);
     });
     configuration.container.appendChild(wrapper);
