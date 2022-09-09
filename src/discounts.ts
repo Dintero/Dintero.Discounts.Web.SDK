@@ -298,10 +298,17 @@ export const createDiscount = (
     discount: Discount,
     configuration: Configuration
 ): HTMLElement => {
+    const containsWebShopLink = discount.links && discount.links.some(x => x.rel && x.rel === 'webshop');
+    const webShopLink = discount.links && discount.links.find(x => x.rel && x.rel === 'webshop');
     const discountElem = createElement({
-        tag: "div",
+        tag: containsWebShopLink ? "a" : "div",
         styles: [normalize, discountStyle],
         theme: configuration.theme,
+        ...(containsWebShopLink && {attributes: [
+            {
+                'href': webShopLink.href,
+            }
+        ]}),
     });
     const ribbonTop = createTopRibbon(discount, configuration);
     const ribbonBottom = createBottomRibbon(discount, configuration);

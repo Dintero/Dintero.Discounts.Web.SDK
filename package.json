@@ -12,7 +12,7 @@
     },
     "scripts": {
         "test": "karma start",
-        "build": "preconstruct build",
+        "build": "preconstruct watch",
         "prepublishOnly": "npm run build",
         "semantic-release": "semantic-release"
     },
