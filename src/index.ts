@@ -8,9 +8,11 @@ import { normalize } from "./normalize";
 import pkg from "../package.json";
 
 
+
 const defaultConfig:Partial<Configuration> = {
     language: 'no',
     version: pkg.version,
+    linkBehaviour: 'direct',
     currency: {
         value: 'Kr',
         position: 'suffix',
@@ -100,7 +102,9 @@ const renderDeals = (configuration: Configuration, discounts: Discount[]):Embed 
     discounts.forEach((discount) => {
         const elem = createDiscount(discount, configuration);
         if (containsWebShopLink(discount)) {
-            elem.setAttribute('target', '_blank');
+            if (configuration.linkBehaviour && configuration.linkBehaviour === 'new_tab') {
+                elem.setAttribute('target', '_blank');
+            }
             elem.setAttribute('href', discount.links.find(x => x.rel === 'webshop').href);
         }
         wrapper.appendChild(elem);
