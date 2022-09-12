@@ -1,4 +1,4 @@
-import { createDiscount } from "./discounts";
+import { createDiscount, findWebshopLink } from "./discounts";
 import { Discount, Configuration, Theme, Embed } from "./types";
 import { createElement } from "./dom";
 import { fetchDiscounts } from "./fetch";
@@ -8,9 +8,11 @@ import { normalize } from "./normalize";
 import pkg from "../package.json";
 
 
+
 const defaultConfig:Partial<Configuration> = {
     language: 'no',
     version: pkg.version,
+    linkTarget: '_self',
     currency: {
         value: 'Kr',
         position: 'suffix',
@@ -76,7 +78,7 @@ export const embed = async (configuration: Configuration):Promise<Embed> => {
         return renderDeals(_configuration, _configuration.discounts);
     } else {
 
-        const loader =createLoading(_configuration);
+        const loader = createLoading(_configuration);
         try{
             configuration.container.appendChild(loader);
             const discounts = await fetchDiscounts(_configuration);
@@ -99,6 +101,11 @@ const renderDeals = (configuration: Configuration, discounts: Discount[]):Embed 
     const wrapper = createElement({ tag: "div", styles: [normalize, wrapperStyles], theme: configuration.theme });
     discounts.forEach((discount) => {
         const elem = createDiscount(discount, configuration);
+        const webShopLink = findWebshopLink(discount);
+        if (webShopLink) {
+            elem.setAttribute('target', configuration?.linkTarget || '_self');
+            elem.setAttribute('href', webShopLink.href);
+        }
         wrapper.appendChild(elem);
     });
     configuration.container.appendChild(wrapper);

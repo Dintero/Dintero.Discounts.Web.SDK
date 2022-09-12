@@ -581,6 +581,7 @@ export type Configuration = {
         limit?: number,
         discountId?: string,
     }
+    linkTarget?: '_blank' | '_self', 
     version?: string,
     discounts?: Discount[] ,
 

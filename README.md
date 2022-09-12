@@ -120,6 +120,40 @@ In this example the SDK is supplied with a list of discount objects directly.
     });
 </script>
 ```
+
+### Inline HTML JavaScript example with discount webshop links and their link behaviour
+
+In this example the SDK will try to fetch data from the discount service with webshop links.
+
+The behaviour of opening links can be adjusted using `linkTarget` in the configuration.
+
+`_self` (default) will open the webshop link directly on the same tab.
+
+`_blank` will open the webshop link in a new tab.
+
+
+```html
+<script type="text/javascript">
+    const container = document.getElementById("checkout-container");
+    discounts.embed({
+        container: document.getElementById("deals-container"),
+        linkTarget: '_blank'
+        api:{
+            account: 'P00000000',
+            key: 'public_api_key',
+            secret: 'abcdef01-2345-6789-abcd-ef0123456789',
+        },
+        theme: {
+            fontSize: "14px",
+            color: "rgba(0,0,0,1)",
+            primary: "hotpink",
+            secondary: "aqua",
+            background: "#fff",
+        }
+    });
+</script>
+```
+
 ## Bugs
 
 Bugs can be reported to https://github.com/Dintero/Dintero.Discounts.Web.SDK/issues
