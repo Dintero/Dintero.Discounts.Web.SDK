@@ -125,11 +125,11 @@ In this example the SDK is supplied with a list of discount objects directly.
 
 In this example the SDK will try to fetch data from the discount service with webshop links.
 
-The behaviour of opening links can be adjusted using `linkBehaviour` in the configuration.
+The behaviour of opening links can be adjusted using `linkTarget` in the configuration.
 
-`direct` (default) will open the webshop link directly on the same tab.
+`_self` (default) will open the webshop link directly on the same tab.
 
-`new_tab` will open the webshop link in a new tab.
+`_blank` will open the webshop link in a new tab.
 
 
 ```html
@@ -137,7 +137,7 @@ The behaviour of opening links can be adjusted using `linkBehaviour` in the conf
     const container = document.getElementById("checkout-container");
     discounts.embed({
         container: document.getElementById("deals-container"),
-        linkBehaviour: 'new_tab'
+        linkTarget: '_blank'
         api:{
             account: 'P00000000',
             key: 'public_api_key',

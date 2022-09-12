@@ -581,7 +581,7 @@ export type Configuration = {
         limit?: number,
         discountId?: string,
     }
-    linkBehaviour?: 'new_tab' | 'direct', 
+    linkTarget?: '_blank' | '_self', 
     version?: string,
     discounts?: Discount[] ,
 

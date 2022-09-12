@@ -4,7 +4,7 @@ import { translations, t } from "./translations";
 import { monetaryString, dateString } from "./formatters";
 import { normalize } from "./normalize";
 
-export const containsWebShopLink = (discount: Discount) => discount.links && discount.links.some(x => x.rel && x.rel === 'webshop');
+export const findWebshopLink = (discount: Discount) => discount.links && discount.links.find(x => x.rel && x.rel === 'webshop');
 
 const discountStyle = (className: string, theme: Theme) => `
 @keyframes appear {
@@ -303,7 +303,7 @@ export const createDiscount = (
     configuration: Configuration
 ): HTMLElement => {
     const discountElem = createElement({
-        tag: containsWebShopLink(discount) ? "a" : "div",
+        tag: findWebshopLink(discount) ? "a" : "div",
         styles: [normalize, discountStyle],
         theme: configuration.theme
     });

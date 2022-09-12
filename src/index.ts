@@ -1,4 +1,4 @@
-import { containsWebShopLink, createDiscount } from "./discounts";
+import { createDiscount, findWebshopLink } from "./discounts";
 import { Discount, Configuration, Theme, Embed } from "./types";
 import { createElement } from "./dom";
 import { fetchDiscounts } from "./fetch";
@@ -12,7 +12,7 @@ import pkg from "../package.json";
 const defaultConfig:Partial<Configuration> = {
     language: 'no',
     version: pkg.version,
-    linkBehaviour: 'direct',
+    linkTarget: '_self',
     currency: {
         value: 'Kr',
         position: 'suffix',
@@ -101,11 +101,10 @@ const renderDeals = (configuration: Configuration, discounts: Discount[]):Embed 
     const wrapper = createElement({ tag: "div", styles: [normalize, wrapperStyles], theme: configuration.theme });
     discounts.forEach((discount) => {
         const elem = createDiscount(discount, configuration);
-        if (containsWebShopLink(discount)) {
-            if (configuration.linkBehaviour && configuration.linkBehaviour === 'new_tab') {
-                elem.setAttribute('target', '_blank');
-            }
-            elem.setAttribute('href', discount.links.find(x => x.rel === 'webshop').href);
+        const webShopLink = findWebshopLink(discount);
+        if (webShopLink) {
+            elem.setAttribute('target', configuration?.linkTarget || '_self');
+            elem.setAttribute('href', webShopLink.href);
         }
         wrapper.appendChild(elem);
     });
