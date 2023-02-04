@@ -26,7 +26,7 @@ export const translations ={
 const findValuesRegex = /(\{\{)[^}]*(\}\})/g;
 // i18n light
 export const t = (translateString: string, values?: {[key:string]: any}):string => {
-    const matches = translateString.match(findValuesRegex) || [];
+    const matches: string[] = translateString.match(findValuesRegex) || [];
     const _values = values || {};
     return matches.reduce<string>((interpolated, match) => {
         const key = match.replace('{{', '').replace('}}', '');
