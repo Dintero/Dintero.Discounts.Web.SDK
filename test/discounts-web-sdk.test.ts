@@ -1,5 +1,3 @@
-import { describe, it } from "mocha";
-import { expect } from "chai";
 import * as discounts from "../src";
 import { Discount } from "../src/types";
 
@@ -43,8 +41,8 @@ describe("discounts.embed", () => {
             discounts:[discount],
             container: container as HTMLElement
         });
-        expect(container.childNodes.length).to.equal(1);
-        expect(container.innerHTML).to.contain('Oppvaskmiddel');
+        expect(container.childNodes.length).toEqual(1);
+        expect(container.innerHTML).toMatch('Oppvaskmiddel');
     });
 
     it("can be destroyed", async () => {
@@ -55,7 +53,7 @@ describe("discounts.embed", () => {
             container,
         });
         discountsInstance.destroy();
-        expect(container.innerHTML).to.equal("");
+        expect(container.innerHTML).toEqual("");
     });
 
 });

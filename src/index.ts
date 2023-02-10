@@ -11,7 +11,7 @@ import pkg from "../package.json";
 
 const defaultConfig:Partial<Configuration> = {
     language: 'no',
-    version: pkg.version,
+    version: pkg?.version || "SNAPSHOT",
     linkTarget: '_self',
     currency: {
         value: 'Kr',
