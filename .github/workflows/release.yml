@@ -29,11 +29,11 @@ jobs:
 
       - name: yarn install and test
         run: |
-          npm install
-          npm run test
+          yarn install
+          yarn run test
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-        run: npm run semantic-release
+        run: yarn run semantic-release

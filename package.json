@@ -14,7 +14,7 @@
         "test": "jest --maxWorkers=1 --detectOpenHandles",
         "watch": "preconstruct watch",
         "build": "preconstruct build",
-        "prepublishOnly": "npm run build",
+        "prepublishOnly": "yarn build",
         "semantic-release": "semantic-release"
     },
     "private": false,
