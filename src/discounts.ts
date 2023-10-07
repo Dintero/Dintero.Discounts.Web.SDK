@@ -294,7 +294,6 @@ const createLimitations = (
         end
     ].filter((child) => child);
     children.forEach((child) => wrapper.appendChild(child));
-    console.log({discount, wrapper});
     return wrapper;
 };
 
