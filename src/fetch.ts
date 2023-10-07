@@ -2,7 +2,7 @@ import { Configuration, Discount, TokenResponse } from "./types";
 
 const createHeaders = (
     keyValues: { [key: string]: string },
-    configuration: Configuration
+    configuration: Configuration,
 ) => {
     const headers: HeadersInit = new Headers();
     Object.entries({
@@ -16,20 +16,20 @@ const createHeaders = (
 };
 
 const fetchAccessToken = (
-    configuration: Configuration
+    configuration: Configuration,
 ): Promise<TokenResponse> => {
     if (!configuration.api) {
         throw new Error("Authentication configuration missing");
     }
     const basicAuthCredentials = window.btoa(
-        `${configuration.api.key}:${configuration.api.secret}`
+        `${configuration.api.key}:${configuration.api.secret}`,
     );
     const headers = createHeaders(
         {
             Authorization: `Basic ${basicAuthCredentials}`,
             "content-type": "application/json",
         },
-        configuration
+        configuration,
     );
     const body = JSON.stringify({
         grant_type: "client_credentials",
@@ -42,7 +42,7 @@ const fetchAccessToken = (
                 method: "POST",
                 headers,
                 body,
-            }
+            },
         )
         .then((response) => {
             if (response.status === 200) {
@@ -53,23 +53,23 @@ const fetchAccessToken = (
 };
 
 export const fetchDiscounts = (
-    configuration: Configuration
+    configuration: Configuration,
 ): Promise<Discount[]> => {
     return fetchAccessToken(configuration).then((tokenResponse) => {
         const headers = createHeaders(
             {
                 Authorization: `${tokenResponse.token_type} ${tokenResponse.access_token}`,
             },
-            configuration
+            configuration,
         );
-        
+
         if (configuration.api.discountId) {
             return window
                 .fetch(
                     `${configuration.api.url}/v1/accounts/${configuration.api.account}/discounts/public/rules/${configuration.api.discountId}`,
                     {
                         headers,
-                    }
+                    },
                 )
                 .then((response) => {
                     if (response.status === 200) {
@@ -88,7 +88,7 @@ export const fetchDiscounts = (
                 `${configuration.api.url}/v1/accounts/${configuration.api.account}/discounts/public/rules?limit=${configuration.api.limit}`,
                 {
                     headers,
-                }
+                },
             )
             .then((response) => {
                 if (response.status === 200) {

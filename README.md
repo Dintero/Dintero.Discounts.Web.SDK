@@ -26,10 +26,10 @@ Make sure to configure the plugin with an API client that only has grants giving
     const container = document.getElementById("checkout-container");
     discounts.embed({
         container: document.getElementById("deals-container"),
-        api:{
-            account: 'P00000000',
-            key: 'public_api_key',
-            secret: 'abcdef01-2345-6789-abcd-ef0123456789',
+        api: {
+            account: "P00000000",
+            key: "public_api_key",
+            secret: "abcdef01-2345-6789-abcd-ef0123456789",
         },
         theme: {
             fontSize: "14px",
@@ -37,7 +37,7 @@ Make sure to configure the plugin with an API client that only has grants giving
             primary: "hotpink",
             secondary: "aqua",
             background: "#fff",
-        }
+        },
     });
 </script>
 ```
@@ -53,11 +53,11 @@ Make sure to configure the plugin with an API client that only has grants giving
     const container = document.getElementById("checkout-container");
     discounts.embed({
         container: document.getElementById("deals-container"),
-        api:{
-            account: 'P00000000',
-            key: 'public_api_key',
-            secret: 'abcdef01-2345-6789-abcd-ef0123456789',
-            discountId: '1234'
+        api: {
+            account: "P00000000",
+            key: "public_api_key",
+            secret: "abcdef01-2345-6789-abcd-ef0123456789",
+            discountId: "1234",
         },
         theme: {
             fontSize: "14px",
@@ -65,7 +65,7 @@ Make sure to configure the plugin with an API client that only has grants giving
             primary: "hotpink",
             secondary: "aqua",
             background: "#fff",
-        }
+        },
     });
 </script>
 ```
@@ -86,37 +86,39 @@ In this example the SDK is supplied with a list of discount objects directly.
             secondary: "aqua",
             background: "#fff",
         },
-        discounts:[{
-            "id": "1",
-            "name": "Testvare",
-            "description": "Beskrivelse av testvare",
-            "requirement": {
-                "item": { "items": [{ "id": "testvare-1" }] },
-                "customer": {},
-                "store_ids": ["*"],
-                "purchase_to": "2030-06-13T21:59:00Z",
-                "purchase_from": "2080-06-06T22:00:00Z"
+        discounts: [
+            {
+                id: "1",
+                name: "Testvare",
+                description: "Beskrivelse av testvare",
+                requirement: {
+                    item: { items: [{ id: "testvare-1" }] },
+                    customer: {},
+                    store_ids: ["*"],
+                    purchase_to: "2030-06-13T21:59:00Z",
+                    purchase_from: "2080-06-06T22:00:00Z",
+                },
+                limitation: {},
+                reward: { type: "discount_item_new_price", value: 5000 },
+                created_by: "DinteroTest",
+                created_at: "2021-06-04T10:21:18.029Z",
+                updated_at: "2021-06-04T10:21:18.029Z",
+                receipt_text: "Ukens tilbud",
+                type: "item",
+                links: [
+                    {
+                        rel: "medium_discount_image",
+                        href: "https://uploads-ssl.webflow.com/5f023ba9549ac22870f32943/5f1333ae5a496b0e0476975e_dintero-logo.svg",
+                    },
+                ],
+                metadata: {
+                    label: "Før: 100,-",
+                    subtitle: "Ukens tilbud",
+                    campaign_id: 1,
+                },
+                active: true,
             },
-            "limitation": {},
-            "reward": { "type": "discount_item_new_price", "value": 5000 },
-            "created_by": "DinteroTest",
-            "created_at": "2021-06-04T10:21:18.029Z",
-            "updated_at": "2021-06-04T10:21:18.029Z",
-            "receipt_text": "Ukens tilbud",
-            "type": "item",
-            "links": [
-                {
-                    "rel": "medium_discount_image",
-                    "href": "https://uploads-ssl.webflow.com/5f023ba9549ac22870f32943/5f1333ae5a496b0e0476975e_dintero-logo.svg"
-                }
-            ],
-            "metadata": {
-                "label": "Før: 100,-",
-                "subtitle": "Ukens tilbud",
-                "campaign_id": 1
-            },
-            "active": true
-        }]
+        ],
     });
 </script>
 ```
@@ -130,7 +132,6 @@ The behaviour of opening links can be adjusted using `linkTarget` in the configu
 `_self` (default) will open the webshop link directly on the same tab.
 
 `_blank` will open the webshop link in a new tab.
-
 
 ```html
 <script type="text/javascript">
