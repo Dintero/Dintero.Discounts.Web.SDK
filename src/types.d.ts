@@ -13,21 +13,21 @@ export interface Item {
 export interface Limitation {
     /**
      * Limit the discount to hours of the day
-     * 
+     *
      */
     discount_hours?: {
         /**
          * The timezone identifier for the hour start/end, see
          * https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
          * for examples. DST is handled when using a Timezone with DST.
-         * 
+         *
          */
         timezone?: string;
         /**
          * an array of periods, day and time when discount will be
          * available. Multiple periods for one day is accepted.
          * Any hour of purchase is accepted if the array is empty.
-         * 
+         *
          */
         hours: {
             day: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
@@ -46,7 +46,7 @@ export interface Limitation {
     /**
      * Limit the number of rewards to be given in a purchase
      * where multiple receipt items match the requirement
-     * 
+     *
      * example:
      * 1
      */
@@ -54,30 +54,33 @@ export interface Limitation {
     /**
      * Limit how many other discounts can be combined in a purchase
      * where multiple discounts are applicable.
-     * 
+     *
      */
     discount_combination?: -1 | 0;
     /**
      * Limit what items in the purchase is eligible for this discount
-     * 
+     *
      */
-    discount_eligible?: "item_eligible_for_discount" | "item_eligible_for_discount_no_discount" | "receipt_no_discount";
+    discount_eligible?:
+        | "item_eligible_for_discount"
+        | "item_eligible_for_discount_no_discount"
+        | "receipt_no_discount";
     /**
      * Limit how many purchases the discount can be used
-     * 
+     *
      */
     discount_repeat_usage?: number;
     /**
      * Number of days between first and last (exceeding count) stamp
      * where reward will be given
-     * 
+     *
      * example:
      * 100
      */
     stamp_expire_days?: number;
     /**
      * items not eligible for discount.
-     * 
+     *
      */
     blacklist?: Item[];
 }
@@ -93,14 +96,14 @@ export type Links = {
     href: string; // uri
     /**
      * Specifies the relationship between the discount and the link
-     * 
+     *
      * Following `rel` values are reserved for specific usage
-     * 
+     *
      *   - thumbnail_discount_image: link to discount image
      *   - medium_discount_image: link to discount image
      *   - large_discount_image: link to discount image
      *   - webshop: link to site where the discount may be used
-     * 
+     *
      */
     rel?: string;
     /**
@@ -112,12 +115,12 @@ export interface StoreRequirement {
     id?: string[];
     /**
      * name of the store, aka trade name of the store
-     * 
+     *
      */
     name?: string[];
     /**
      * Official name of the person or entity that owns the store.
-     * 
+     *
      */
     business_name?: string[];
     /**
@@ -148,14 +151,14 @@ export interface StoreRequirement {
     /**
      * A four-digit Merchant Category Code (MCC) for the store
      * [ISO 18245:2003](https://www.iso.org/standard/33365.html)
-     * 
+     *
      */
-    mcc?: string /* iso-18245 */ [];
+    mcc?: string /* iso-18245 */[];
     /**
      * Ranges of MCC codes to accept the discount for.
      * Multiple ranges are possible.
      * Prefer `mcc` if not a range.
-     * 
+     *
      */
     mcc_ranges?: {
         /**
@@ -172,13 +175,13 @@ export interface StoreRequirement {
     /**
      * Merchant number associated with the stores
      * payment terminal
-     * 
+     *
      */
     bax?: string[];
     /**
      * Id to a specific point-of-sale (POS) terminal
      * or workstation
-     * 
+     *
      */
     terminal_id?: string[];
 }
@@ -186,7 +189,7 @@ export interface ItemMixProperty {
     /**
      * Acceptable items for the mix "item" (`any`). No wildcard `*` is
      * accepted.
-     * 
+     *
      * example:
      * [object Object],[object Object]
      */
@@ -204,14 +207,14 @@ export interface ItemMixProperty {
     }[];
     /**
      * minimum quantity of given item (match by id or group) by the mix
-     * 
+     *
      */
     quantity: number;
     /**
      * The item will be eligible for discount when calculating the reward
      * Example: The value of `discount_item_new_price` reward will be the
      * total price of all items in a mix that has the applicable set to `true`
-     * 
+     *
      */
     reward_eligible: boolean;
 }
@@ -249,7 +252,7 @@ export interface CustomerRequirement {
     }[];
     /**
      * Require customer to be a company matching all properties defined.
-     * 
+     *
      */
     company?: {
         /**
@@ -340,7 +343,7 @@ export interface CustomerRequirement {
      * limit discount to only receipt where customer status
      * is included in the receipt and match one of the status
      * values required by the discount
-     * 
+     *
      * example:
      * vip
      */
@@ -355,23 +358,23 @@ export interface Requirement {
     item?: {
         /**
          * minimum number of items
-         * 
+         *
          */
         quantity?: number;
         /**
          * Required mix items for the discount.
-         * 
+         *
          * A purchase must include `all` the items to fulfill the `item.mixes`
          * requirement.
-         * 
+         *
          */
         mixes?: ItemMixProperty[];
         /**
          * Required items for the discount
-         * 
+         *
          * A purchase can include `any` of the items to fulfill the `item.items`
          * requirement.
-         * 
+         *
          */
         items?: Item[];
     };
@@ -379,18 +382,18 @@ export interface Requirement {
     /**
      * Minimum gross amount on purchase.
      * Monetary amount in smallest unit for the currency
-     * 
+     *
      */
     gross_amount?: number;
     /**
      * List of valid currencies, or `[{"anything-but": ["NOK"]}]` to exclude currencies.
      * Currency format is the three-character [ISO-4217 currency](https://en.wikipedia.org/wiki/ISO_4217).
-     * 
+     *
      */
     currencies?: any[];
     /**
      * Stamp count required for the reward
-     * 
+     *
      * example:
      * 5
      */
@@ -399,7 +402,7 @@ export interface Requirement {
      * A code required for the reward. The purchase must include the
      * promotion code in the `receipt.discount_code` property or as
      * an `receipt.item` where the `item.id` is the promotion code.
-     * 
+     *
      * example:
      * TACO
      */
@@ -410,7 +413,7 @@ export interface Requirement {
 }
 export interface Reward {
     /**
-     * 
+     *
      * Reward Type:
      *   * `discount_amount` - value as discount
      *   * `discount_percent` - value percentage of gross amount
@@ -423,18 +426,25 @@ export interface Reward {
      *     purchase will be available in future purchases (if not limited by usage)
      *   * `discount_mix_new_price` - discount as old mix total value (reward_eligible=true)
      *     subtracted with value
-     * 
+     *
      */
-    type: "discount_amount" | "discount_percent" | "discount_item_new_price" | "discount_item_quantity" | "discount_item_percent" | "discount_mix_new_price" | "discount_debit";
+    type:
+        | "discount_amount"
+        | "discount_percent"
+        | "discount_item_new_price"
+        | "discount_item_quantity"
+        | "discount_item_percent"
+        | "discount_mix_new_price"
+        | "discount_debit";
     /**
      * The reward value, unit of the value is resolved
      * from the reward type
-     * 
+     *
      * Examples:
      *   - Percent: 10.5
      *   - Amount: 10000 (amount in smallest unit for the currency)
      *   - Quantity: 1
-     * 
+     *
      * example:
      * 10000
      */
@@ -442,45 +452,45 @@ export interface Reward {
     /**
      * Let the discount reward be calculated from net or gross price.
      * Not applicable for `discount_item_new_price`
-     * 
+     *
      * *Example*:
      *   item A à 100,- NOK with existing rebate of 20,-
-     * 
+     *
      *   - 10% net reward is 10% of 80,- : 8,-
      *   - 10% gross reward is 10% of 100,- : 10,-
-     * 
+     *
      *   * *net*: `gross - "any existing discounts"`
      *   * *gross*: `"total expense amount, including taxes"`
-     * 
+     *
      */
     base?: "net" | "gross";
 }
 export interface Discount {
     /**
      * An UUID that uniquely identifies the resource
-     * 
+     *
      */
     readonly id?: string; // uuid
     /**
      * The date-time when the resource was created
-     * 
+     *
      */
     readonly created_at?: string; // date-time
     /**
      * The ID of the user/client created the resource
-     * 
+     *
      * example:
      * 1c92f7e1-2897-4d46-bdcc-c127a914fb4e
      */
     readonly created_by?: string;
     /**
      * The date-time when the resource was last updated
-     * 
+     *
      */
     readonly updated_at?: string; // date-time
     /**
      * The ID of the user/client created the resource
-     * 
+     *
      * example:
      * 1c92f7e1-2897-4d46-bdcc-c127a914fb4e
      */
@@ -488,24 +498,24 @@ export interface Discount {
     readonly deleted_at?: string; // date-time
     /**
      * The campaign the rule belongs to
-     * 
+     *
      */
     campaign_id?: string;
     /**
      * the discount is active and can be available
      * for purchase (if given to any or all customers)
-     * 
+     *
      */
     active?: boolean;
     /**
      * the discount will be exluded from  public discount collection
      * (GET /discounts/public/rules).
-     * 
+     *
      */
     private?: boolean;
     /**
      * The ID of the user/client that last updated the resource
-     * 
+     *
      * example:
      * 3d1e4824-5474-48e7-a369-4f603fa4c5b8
      */
@@ -522,7 +532,7 @@ export interface Discount {
     /**
      * Text that should be used when displaying
      * the discount, e.g. on receipt
-     * 
+     *
      * example:
      * Mai Salg
      */
@@ -532,7 +542,7 @@ export interface Discount {
      * given date. Default behavior is to only return
      * discount to the customer where the current time
      * is between purchase_from and purchase_to
-     * 
+     *
      */
     visible_from?: string; // date-time
     /**
@@ -545,53 +555,52 @@ export interface Discount {
     reward: Reward;
     /**
      * Additional metadata about the discount
-     * 
+     *
      * example:
      * [object Object]
      */
     metadata?: {
-        [key: string]: any
+        [key: string]: any;
     };
     links?: Links;
 }
 
 export type Theme = {
-    color?: string,
-    background?: string,
-    primary?: string,
-    secondary?: string,
-    borderRadius?: string,
-    fontSize?: string,
-}
+    color?: string;
+    background?: string;
+    primary?: string;
+    secondary?: string;
+    borderRadius?: string;
+    fontSize?: string;
+};
 
 export type Configuration = {
-    container: HTMLElement,
-    language?: string,
+    container: HTMLElement;
+    language?: string;
     currency?: {
-        value: string
-        position: 'prefix' | 'suffix',
-        exponent: 2
-    },
-    theme?: Theme,
+        value: string;
+        position: "prefix" | "suffix";
+        exponent: 2;
+    };
+    theme?: Theme;
     api?: {
-        account: string,
-        key: string,
-        secret: string,
-        url: string,
-        limit?: number,
-        discountId?: string,
-    }
-    linkTarget?: '_blank' | '_self', 
-    version?: string,
-    discounts?: Discount[] ,
-
-}
+        account: string;
+        key: string;
+        secret: string;
+        url: string;
+        limit?: number;
+        discountId?: string;
+    };
+    linkTarget?: "_blank" | "_self";
+    version?: string;
+    discounts?: Discount[];
+};
 
 type TokenResponse = {
-    access_token: string,
-    token_type: string
-}
+    access_token: string;
+    token_type: string;
+};
 
 export type Embed = {
     destroy: () => void;
-}
+};

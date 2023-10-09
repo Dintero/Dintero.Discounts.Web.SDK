@@ -37,17 +37,14 @@ const errorStyle = (className: string, theme: Theme) => `
 }
 `;
 
-
-export const createError = (
-    configuration: Configuration
-): HTMLElement => {
-    const tString  = translations[configuration.language];
+export const createError = (configuration: Configuration): HTMLElement => {
+    const tString = translations[configuration.language];
     const errorElem = createElement({
         tag: "div",
         styles: [normalize, errorStyle],
         theme: configuration.theme,
-        innerHTML: tString.errors.fetch
+        innerHTML: tString.errors.fetch,
     });
- 
+
     return errorElem;
 };

@@ -4,7 +4,8 @@ import { translations, t } from "./translations";
 import { monetaryString, dateString } from "./formatters";
 import { normalize } from "./normalize";
 
-export const findWebshopLink = (discount: Discount) => discount.links && discount.links.find(x => x.rel && x.rel === 'webshop');
+export const findWebshopLink = (discount: Discount) =>
+    discount.links && discount.links.find((x) => x.rel && x.rel === "webshop");
 
 const discountStyle = (className: string, theme: Theme) => `
 @keyframes appear {
@@ -145,7 +146,6 @@ const limitationsWrapperStyle = (className: string) => `
 }
 `;
 
-
 const getTopRibbonText = (discount: Discount) => {
     return (
         (discount && discount.metadata && discount.metadata.label) || undefined
@@ -167,7 +167,7 @@ const createTopRibbon = (discount: Discount, configuration: Configuration) => {
 
 const getBottomRibbonText = (
     discount: Discount,
-    configuration: Configuration
+    configuration: Configuration,
 ) => {
     const tStrings = translations[configuration.language];
     if (discount.reward.type === "discount_item_new_price") {
@@ -196,7 +196,7 @@ const getBottomRibbonText = (
         const monetaryAmount = monetaryString(
             discount.reward.value,
             configuration,
-            { decimal: false }
+            { decimal: false },
         );
         return t(tStrings.rewards.discount_amount, { monetaryAmount });
     } else if (discount.reward.type === "discount_item_percent") {
@@ -207,7 +207,7 @@ const getBottomRibbonText = (
 
 const createBottomRibbon = (
     discount: Discount,
-    configuration: Configuration
+    configuration: Configuration,
 ) => {
     const text = getBottomRibbonText(discount, configuration);
     return (
@@ -234,7 +234,11 @@ const createImage = (discount: Discount) => {
         imageSrc &&
         createElement({
             tag: "img",
-            attributes: { src: imageSrc.href, alt: discount.name, loading: "lazy"},
+            attributes: {
+                src: imageSrc.href,
+                alt: discount.name,
+                loading: "lazy",
+            },
             styles: [normalize, imageStyle],
         });
     if (image) {
@@ -245,7 +249,7 @@ const createImage = (discount: Discount) => {
 
 const createLimitations = (
     discount: Discount,
-    configuration: Configuration
+    configuration: Configuration,
 ) => {
     const tStrings = translations[configuration.language];
 
@@ -260,7 +264,8 @@ const createLimitations = (
         createElement({
             tag: "span",
             innerHTML: t(tStrings.limitations.discount_reward_usage, {
-                discount_reward_usage: discount.limitation.discount_reward_usage,
+                discount_reward_usage:
+                    discount.limitation.discount_reward_usage,
             }),
         });
     const repeat =
@@ -269,52 +274,66 @@ const createLimitations = (
         createElement({
             tag: "span",
             innerHTML: t(tStrings.limitations.discount_repeat_usage, {
-                discount_repeat_usage: discount.limitation.discount_repeat_usage,
+                discount_repeat_usage:
+                    discount.limitation.discount_repeat_usage,
             }),
         });
 
     const startDate = new Date(discount.requirement.purchase_from || 0);
-    const start = startDate > new Date() && createElement({
-        tag: "span",
-        innerHTML: t(tStrings.requirements.purchase_from, {
-            purchase_from: dateString(discount.requirement.purchase_from, configuration),
-        }),
-    });
+    const start =
+        startDate > new Date() &&
+        createElement({
+            tag: "span",
+            innerHTML: t(tStrings.requirements.purchase_from, {
+                purchase_from: dateString(
+                    discount.requirement.purchase_from,
+                    configuration,
+                ),
+            }),
+        });
     const endDate = new Date(discount.requirement.purchase_to || 0);
-    const end = endDate > new Date() && createElement({
-        tag: "span",
-        innerHTML: t(tStrings.requirements.purchase_to, {
-            purchase_to: dateString(discount.requirement.purchase_to, configuration),
-        }),
-    });
-    const children = [
-        quantity,
-        repeat,
-        start,
-        end
-    ].filter((child) => child);
+    const end =
+        endDate > new Date() &&
+        createElement({
+            tag: "span",
+            innerHTML: t(tStrings.requirements.purchase_to, {
+                purchase_to: dateString(
+                    discount.requirement.purchase_to,
+                    configuration,
+                ),
+            }),
+        });
+    const children = [quantity, repeat, start, end].filter((child) => child);
     children.forEach((child) => wrapper.appendChild(child));
     return wrapper;
 };
 
 export const createDiscount = (
     discount: Discount,
-    configuration: Configuration
+    configuration: Configuration,
 ): HTMLElement => {
     const discountElem = createElement({
         tag: findWebshopLink(discount) ? "a" : "div",
         styles: [normalize, discountStyle],
-        theme: configuration.theme
+        theme: configuration.theme,
     });
     const ribbonTop = createTopRibbon(discount, configuration);
     const ribbonBottom = createBottomRibbon(discount, configuration);
     const image = createImage(discount);
     const title =
         discount?.name &&
-        createElement({ tag: "h4", innerHTML: discount.name , styles:[titleStyle]});
+        createElement({
+            tag: "h4",
+            innerHTML: discount.name,
+            styles: [titleStyle],
+        });
     const subtitle =
         discount?.metadata?.subtitle &&
-        createElement({ tag: "p", innerHTML: discount.metadata.subtitle, styles: [subtitleStyle] });
+        createElement({
+            tag: "p",
+            innerHTML: discount.metadata.subtitle,
+            styles: [subtitleStyle],
+        });
     const description =
         discount.description &&
         createElement({ tag: "p", innerHTML: discount.description });
@@ -328,7 +347,7 @@ export const createDiscount = (
         title,
         subtitle,
         description,
-        limitations
+        limitations,
     ].filter((child) => child);
     children.forEach((child) => discountElem.appendChild(child));
     return discountElem;

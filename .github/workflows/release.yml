@@ -25,12 +25,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
-      - name: yarn install and test
+      - name: yarn install, test and lint
         run: |
           yarn install
           yarn run test
+          yarn run lint
 
       - name: Release
         env:

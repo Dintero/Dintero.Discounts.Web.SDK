@@ -7,16 +7,14 @@ import { createLoading } from "./loading";
 import { normalize } from "./normalize";
 import pkg from "../package.json";
 
-
-
-const defaultConfig:Partial<Configuration> = {
-    language: 'no',
+const defaultConfig: Partial<Configuration> = {
+    language: "no",
     version: pkg?.version || "SNAPSHOT",
-    linkTarget: '_self',
+    linkTarget: "_self",
     currency: {
-        value: 'Kr',
-        position: 'suffix',
-        exponent: 2
+        value: "Kr",
+        position: "suffix",
+        exponent: 2,
     },
     theme: {
         background: "#fff",
@@ -33,28 +31,31 @@ const defaultConfig:Partial<Configuration> = {
         url: "https://api.dintero.com",
         limit: 50,
     },
-}
+};
 
-const mergeConfig = (a:Partial<Configuration>, b:Configuration): Configuration =>{
+const mergeConfig = (
+    a: Partial<Configuration>,
+    b: Configuration,
+): Configuration => {
     return {
         ...a,
         ...b,
-        currency:{
+        currency: {
             ...a.currency,
             ...b.currency,
         },
         theme: {
             ...a.theme,
-            ...b.theme
+            ...b.theme,
         },
-        api:{
+        api: {
             ...a.api,
-            ...b.api
-        }
-    }
-}
+            ...b.api,
+        },
+    };
+};
 
-const wrapperStyles = (className: string, theme:Theme) => `
+const wrapperStyles = (className: string, theme: Theme) => `
 .${className} {
     display: flex;
     flex-flow: wrap;
@@ -67,44 +68,49 @@ const wrapperStyles = (className: string, theme:Theme) => `
     color: ${theme.color};
 }`;
 
-export const embed = async (configuration: Configuration):Promise<Embed> => {
-
+export const embed = async (configuration: Configuration): Promise<Embed> => {
     const _configuration = mergeConfig(defaultConfig, configuration);
-    if(!_configuration.container ||!_configuration.container.appendChild){
+    if (!_configuration.container || !_configuration.container.appendChild) {
         console.error("Invalid configuration");
         throw new Error("Invalid configuration");
     }
     if (_configuration.discounts) {
         return renderDeals(_configuration, _configuration.discounts);
     } else {
-
         const loader = createLoading(_configuration);
-        try{
+        try {
             configuration.container.appendChild(loader);
             const discounts = await fetchDiscounts(_configuration);
             _configuration.container.removeChild(loader);
             return renderDeals(_configuration, discounts);
-        } catch(error) {
+        } catch (error) {
             configuration.container.removeChild(loader);
             const errorMessage = createError(_configuration);
             _configuration.container.appendChild(errorMessage);
             return {
                 destroy: () => {
                     configuration.container.removeChild(errorMessage);
-                }
-            }
+                },
+            };
         }
     }
 };
 
-const renderDeals = (configuration: Configuration, discounts: Discount[]):Embed => {
-    const wrapper = createElement({ tag: "div", styles: [normalize, wrapperStyles], theme: configuration.theme });
+const renderDeals = (
+    configuration: Configuration,
+    discounts: Discount[],
+): Embed => {
+    const wrapper = createElement({
+        tag: "div",
+        styles: [normalize, wrapperStyles],
+        theme: configuration.theme,
+    });
     discounts.forEach((discount) => {
         const elem = createDiscount(discount, configuration);
         const webShopLink = findWebshopLink(discount);
         if (webShopLink) {
-            elem.setAttribute('target', configuration?.linkTarget || '_self');
-            elem.setAttribute('href', webShopLink.href);
+            elem.setAttribute("target", configuration?.linkTarget || "_self");
+            elem.setAttribute("href", webShopLink.href);
         }
         wrapper.appendChild(elem);
     });
@@ -112,6 +118,6 @@ const renderDeals = (configuration: Configuration, discounts: Discount[]):Embed 
     return {
         destroy: () => {
             configuration.container.removeChild(wrapper);
-        }
-    }
+        },
+    };
 };

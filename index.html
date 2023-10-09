@@ -5,8 +5,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0"
         />
-        <meta charset="UTF-8">
-
+        <meta charset="UTF-8" />
 
         <style>
             body {
@@ -121,7 +120,7 @@
                 function (event) {
                     console.log("embed received message", event);
                 },
-                false
+                false,
             );
             function changeBackground() {
                 if (document.body.className === "color") {
@@ -131,9 +130,12 @@
                 }
             }
         </script>
-        <script src="./dist/dintero-discounts-web-sdk.umd.min.js"  charset="UTF-8"></script>
+        <script
+            src="./dist/dintero-discounts-web-sdk.umd.min.js"
+            charset="UTF-8"
+        ></script>
     </head>
-    <bod
+    <body>
         <div class="main">
             <h1>Mock for embed</h1>
             <div class="mb-10">
@@ -148,78 +150,97 @@
                 <label for="checkbox">Change background color</label>
             </div>
             <h2>API test</h2>
-            <p>In this example the SDK will try to fetch data from the discount service.</p>
+            <p>
+                In this example the SDK will try to fetch data from the discount
+                service.
+            </p>
             <div id="deals-container-api"></div>
             <script type="text/javascript">
-                discounts.embed({
-                    container: document.getElementById("deals-container-api"),
-                    api:{
-                        account: 'P00000000',
-                        key: 'public_api_key',
-                        secret: 'abcdef01-2345-6789-abcd-ef0123456789',
-                    },
-                    theme: {
-                        fontSize: "14px",
-                        color: "rgba(0,0,0,1)",
-                        primary: "hotpink",
-                        secondary: "aqua",
-                        background: "#fff",
-                    }
-                }).then(result => {
-                    window.setTimeout(result.destroy, 50000);
-                });
+                discounts
+                    .embed({
+                        container: document.getElementById(
+                            "deals-container-api",
+                        ),
+                        api: {
+                            account: "P00000000",
+                            key: "public_api_key",
+                            secret: "abcdef01-2345-6789-abcd-ef0123456789",
+                        },
+                        theme: {
+                            fontSize: "14px",
+                            color: "rgba(0,0,0,1)",
+                            primary: "hotpink",
+                            secondary: "aqua",
+                            background: "#fff",
+                        },
+                    })
+                    .then((result) => {
+                        window.setTimeout(result.destroy, 50000);
+                    });
             </script>
-            <H2>Static test</h2>
-            <p>In this example the SDK is supplied with a list of discount objects directly.</p>
+            <h2>Static test</h2>
+            <p>
+                In this example the SDK is supplied with a list of discount
+                objects directly.
+            </p>
             <div id="deals-container-static"></div>
             <script type="text/javascript">
-                discounts.embed({
-                    container: document.getElementById("deals-container-static"),
-                    discounts:[{
-                        "id": "1",
-                        "name": "Testvare",
-                        "description": "Beskrivelse av testvare",
-                        "requirement": {
-                            "item": { "items": [{ "id": "testvare-1" }] },
-                            "customer": {},
-                            "store_ids": ["*"],
-                            "purchase_to": "2030-06-13T21:59:00Z",
-                            "purchase_from": "2080-06-06T22:00:00Z"
-                        },
-                        "limitation": {},
-                        "reward": { "type": "discount_item_new_price", "value": 5000 },
-                        "created_by": "DinteroTest",
-                        "created_at": "2021-06-04T10:21:18.029Z",
-                        "updated_at": "2021-06-04T10:21:18.029Z",
-                        "receipt_text": "Ukens tilbud",
-                        "type": "item",
-                        "links": [
+                discounts
+                    .embed({
+                        container: document.getElementById(
+                            "deals-container-static",
+                        ),
+                        discounts: [
                             {
-                                "rel": "medium_discount_image",
-                                "href": "https://uploads-ssl.webflow.com/5f023ba9549ac22870f32943/5f1333ae5a496b0e0476975e_dintero-logo.svg"
+                                id: "1",
+                                name: "Testvare",
+                                description: "Beskrivelse av testvare",
+                                requirement: {
+                                    item: { items: [{ id: "testvare-1" }] },
+                                    customer: {},
+                                    store_ids: ["*"],
+                                    purchase_to: "2030-06-13T21:59:00Z",
+                                    purchase_from: "2080-06-06T22:00:00Z",
+                                },
+                                limitation: {},
+                                reward: {
+                                    type: "discount_item_new_price",
+                                    value: 5000,
+                                },
+                                created_by: "DinteroTest",
+                                created_at: "2021-06-04T10:21:18.029Z",
+                                updated_at: "2021-06-04T10:21:18.029Z",
+                                receipt_text: "Ukens tilbud",
+                                type: "item",
+                                links: [
+                                    {
+                                        rel: "medium_discount_image",
+                                        href: "https://uploads-ssl.webflow.com/5f023ba9549ac22870f32943/5f1333ae5a496b0e0476975e_dintero-logo.svg",
+                                    },
+                                    {
+                                        rel: "webshop",
+                                        href: "https://example.dintero.com/shop?utm_source=dintero&utm_medium=email&utm_campaign=spring-summer",
+                                    },
+                                ],
+                                metadata: {
+                                    label: "Før: 100,-",
+                                    subtitle: "Ukens tilbud",
+                                    campaign_id: 1,
+                                },
+                                active: true,
                             },
-                            {
-                                "rel": "webshop",
-                                "href": "https://example.dintero.com/shop?utm_source=dintero&utm_medium=email&utm_campaign=spring-summer"
-                            }
                         ],
-                        "metadata": {
-                            "label": "Før: 100,-",
-                            "subtitle": "Ukens tilbud",
-                            "campaign_id": 1
+                        theme: {
+                            fontSize: "14px",
+                            color: "rgba(0,0,0,1)",
+                            primary: "hotpink",
+                            secondary: "aqua",
+                            background: "#fff",
                         },
-                        "active": true
-                    }],
-                    theme: {
-                        fontSize: "14px",
-                        color: "rgba(0,0,0,1)",
-                        primary: "hotpink",
-                        secondary: "aqua",
-                        background: "#fff",
-                    }
-                }).then(result => {
-                    window.setTimeout(result.destroy, 50000);
-                });
+                    })
+                    .then((result) => {
+                        window.setTimeout(result.destroy, 50000);
+                    });
             </script>
         </div>
     </body>
