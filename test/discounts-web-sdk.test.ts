@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vitest";
+
 import * as discounts from "../src";
 import { Discount } from "../src/types";
 
