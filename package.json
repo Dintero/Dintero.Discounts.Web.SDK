@@ -32,7 +32,7 @@
     "devDependencies": {
         "@babel/core": "7.23.7",
         "@babel/preset-typescript": "7.23.3",
-        "@preconstruct/cli": "2.8.2",
+        "@preconstruct/cli": "2.8.3",
         "@semantic-release/git": "10.0.1",
         "happy-dom": "13.1.4",
         "prettier": "3.1.1",
