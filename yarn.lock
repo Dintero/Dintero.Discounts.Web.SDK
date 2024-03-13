@@ -2456,10 +2456,10 @@ handlebars@^4.7.7:
   optionalDependencies:
     uglify-js "^3.1.4"
 
-happy-dom@13.7.8:
-  version "13.7.8"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-13.7.8.tgz#3e4439b8c0986d9a2609a147b2192455fd6a7404"
-  integrity sha512-dnvgCiPPfXXts+AW1DVAoDa9nPmI48YPHUv34L6pmjv2lwNZte8OwsK9SajEXENfibS8uo1zG7xJwlW/NXlDxQ==
+happy-dom@13.8.2:
+  version "13.8.2"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-13.8.2.tgz#ab6d74cd0f712403d07d3b88dac6baa32659c346"
+  integrity sha512-u9KxyeQNIzkJDR2iCitKeS5Uy0YUv5eOntpO8e7ZzbDVv4kP5Y77Zo2LnZitwMrss/1pY2Uc2e5qOVGkiKE5Gg==
   dependencies:
     entities "^4.5.0"
     webidl-conversions "^7.0.0"
