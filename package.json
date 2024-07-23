@@ -37,7 +37,7 @@
         "happy-dom": "14.12.3",
         "prettier": "3.3.3",
         "semantic-release": "24.0.0",
-        "typescript": "5.5.3",
+        "typescript": "5.5.4",
         "vitest": "2.0.3"
     }
 }
