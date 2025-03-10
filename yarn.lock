@@ -2522,10 +2522,10 @@ handlebars@^4.7.7:
   optionalDependencies:
     uglify-js "^3.1.4"
 
-happy-dom@17.3.0:
-  version "17.3.0"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-17.3.0.tgz#d9020b3759a5e2802df2afd16d681db144b964b2"
-  integrity sha512-dTwlpUHrhE0usQOd1Df9k461SOYQUWNl0G31mXCDj+N9//oPcDb+cchrSJzrXN6qxZ5sZSrLf5AfY702Zvddfw==
+happy-dom@17.4.3:
+  version "17.4.3"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-17.4.3.tgz#e47c87c6da3529c1519bebbbcac99443507ffdf4"
+  integrity sha512-8mDGIKxi2hAg0DkEYjBHPi5QykWiqdNNQQWrwLXLfro1eAZk8+lSnzbUrnU25bamG9PjEQGoFrA32ezQNJQdww==
   dependencies:
     webidl-conversions "^7.0.0"
     whatwg-mimetype "^3.0.0"
