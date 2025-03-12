@@ -30,7 +30,7 @@
         "url": "https://github.com/Dintero/Dintero.Discounts.Web.SDK/issues"
     },
     "devDependencies": {
-        "@babel/core": "7.26.9",
+        "@babel/core": "7.26.10",
         "@babel/preset-typescript": "7.26.0",
         "@preconstruct/cli": "2.8.11",
         "@semantic-release/git": "10.0.1",
