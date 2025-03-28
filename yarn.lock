@@ -825,10 +825,10 @@
     "@pnpm/network.ca-file" "^1.0.1"
     config-chain "^1.1.11"
 
-"@preconstruct/cli@2.8.11":
-  version "2.8.11"
-  resolved "https://registry.yarnpkg.com/@preconstruct/cli/-/cli-2.8.11.tgz#f25a71336c04cc2cd1fbab5ffcc5d4ff5b19ef4f"
-  integrity sha512-E2t6oUt0canrRVh2033J36n84tdUIdxQu1/CTA8wXBNGyasFwGLwAj4AfZw/kADGyCimFWOVhXWC8Yqp2rtS3Q==
+"@preconstruct/cli@2.8.12":
+  version "2.8.12"
+  resolved "https://registry.yarnpkg.com/@preconstruct/cli/-/cli-2.8.12.tgz#9d91347c2460c812acbd0a68720c2eed8bb64131"
+  integrity sha512-SMsMICUWROmu/vb4cmrk7EJUiWhgNjB3U3tM654K9bu9yECXqrPN473vliO7KPV3CSLhmtl3S4nfcMirEJmyZg==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.7.7"
