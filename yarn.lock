@@ -1854,10 +1854,10 @@ enquirer@^2.3.6:
     ansi-colors "^4.1.1"
     strip-ansi "^6.0.1"
 
-entities@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/entities/-/entities-6.0.1.tgz#c28c34a43379ca7f61d074130b2f5f7020a30694"
-  integrity sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==
+entities@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/entities/-/entities-7.0.1.tgz#26e8a88889db63417dcb9a1e79a3f1bc92b5976b"
+  integrity sha512-TWrgLOFUQTH994YUyl1yT4uyavY5nNB5muff+RtWaqNVCAK408b5ZnnbNAUEWLTCpum9w6arT70i1XdQ4UeOPA==
 
 env-ci@^11.0.0, env-ci@^11.2.0:
   version "11.2.0"
@@ -2264,15 +2264,15 @@ handlebars@^4.7.7:
   optionalDependencies:
     uglify-js "^3.1.4"
 
-happy-dom@20.6.1:
-  version "20.6.1"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-20.6.1.tgz#af9cf1722871621334e0451b01548d551c91b515"
-  integrity sha512-+0vhESXXhFwkdjZnJ5DlmJIfUYGgIEEjzIjB+aKJbFuqlvvKyOi+XkI1fYbgYR9QCxG5T08koxsQ6HrQfa5gCQ==
+happy-dom@20.6.2:
+  version "20.6.2"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-20.6.2.tgz#83bbeb353c8d3813462ce1eb742e72b56066a480"
+  integrity sha512-Xk/Y0cuq9ngN/my8uvK4gKoyDl6sBKkIl8A/hJ0IabZVH7E5SJLHNE7uKRPVmSrQbhJaLIHTEcvTct4GgNtsRA==
   dependencies:
     "@types/node" ">=20.0.0"
     "@types/whatwg-mimetype" "^3.0.2"
     "@types/ws" "^8.18.1"
-    entities "^6.0.1"
+    entities "^7.0.1"
     whatwg-mimetype "^3.0.0"
     ws "^8.18.3"
 
