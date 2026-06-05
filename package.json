@@ -31,7 +31,7 @@
     },
     "devDependencies": {
         "@babel/core": "7.29.7",
-        "@babel/preset-typescript": "7.28.5",
+        "@babel/preset-typescript": "7.29.7",
         "@preconstruct/cli": "2.8.13",
         "@semantic-release/git": "10.0.1",
         "happy-dom": "20.9.0",
