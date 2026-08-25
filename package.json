@@ -33,7 +33,7 @@
         "@babel/core": "7.29.7",
         "@babel/preset-typescript": "7.29.7",
         "@preconstruct/cli": "2.8.13",
-        "@semantic-release/git": "10.0.1",
+        "@semantic-release/git": "11.0.1",
         "happy-dom": "20.11.2",
         "prettier": "3.9.5",
         "semantic-release": "25.0.9",
