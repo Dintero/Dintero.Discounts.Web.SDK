@@ -1,6 +1,6 @@
 DEPENDENCY_FILES := package.json pnpm-lock.yaml
 INSTALLED_MARKER := node_modules/.installed
-TARGETS := help dependencies lint test build
+TARGETS := help dependencies lint test build watch
 
 .PHONY: $(TARGETS)
 
@@ -13,5 +13,5 @@ $(INSTALLED_MARKER): $(DEPENDENCY_FILES)
 	pnpm install
 	touch $@
 
-lint test build: dependencies
+lint test build watch: dependencies
 	pnpm run $@ $(ARGS)

@@ -1,8 +1,8 @@
-import type { Configuration, Discount, TokenResponse } from "./types";
+import type { Discount, ResolvedConfiguration, TokenResponse } from "./types";
 
 const createHeaders = (
     keyValues: { [key: string]: string },
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
 ) => {
     const headers: HeadersInit = new Headers();
     Object.entries({
@@ -16,7 +16,7 @@ const createHeaders = (
 };
 
 const fetchAccessToken = (
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
 ): Promise<TokenResponse> => {
     if (!configuration.api) {
         throw new Error("Authentication configuration missing");
@@ -53,7 +53,7 @@ const fetchAccessToken = (
 };
 
 export const fetchDiscounts = (
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
 ): Promise<Discount[]> => {
     return fetchAccessToken(configuration).then((tokenResponse) => {
         const headers = createHeaders(

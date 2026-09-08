@@ -1,8 +1,8 @@
-import type { Configuration } from "./types";
+import type { ResolvedConfiguration } from "./types";
 
 export const monetaryString = (
     amount: number,
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
     options?: {
         decimal?: boolean;
         currency?: boolean;
@@ -37,7 +37,10 @@ const padZero = (value: number) => {
     return value.toString();
 };
 
-export const dateString = (isoString: string, configuration: Configuration) => {
+export const dateString = (
+    isoString: string,
+    configuration: ResolvedConfiguration,
+) => {
     try {
         const date = new Date(isoString);
         if (configuration.language === "no") {

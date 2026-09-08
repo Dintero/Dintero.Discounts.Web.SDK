@@ -596,6 +596,14 @@ export type Configuration = {
     discounts?: Discount[];
 };
 
+export type ResolvedConfiguration = Configuration &
+    Required<
+        Pick<
+            Configuration,
+            "language" | "currency" | "theme" | "api" | "linkTarget" | "version"
+        >
+    >;
+
 export type TokenResponse = {
     access_token: string;
     token_type: string;

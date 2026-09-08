@@ -2,7 +2,7 @@ import { createElement } from "./dom";
 import { dateString, monetaryString } from "./formatters";
 import { normalize } from "./normalize";
 import { t, translations } from "./translations";
-import type { Configuration, Discount, Theme } from "./types";
+import type { Discount, ResolvedConfiguration, Theme } from "./types";
 
 export const findWebshopLink = (discount: Discount) =>
     discount.links?.find((x) => x.rel && x.rel === "webshop");
@@ -67,7 +67,7 @@ const imageStyle = (className: string) => `
     display: inline-block;
 }`;
 
-const ribbonTopStyle = (className: string, theme?: Theme) => `
+const ribbonTopStyle = (className: string, theme: Theme) => `
 .${className} {
     position: absolute;
     bottom: 60px;
@@ -78,7 +78,7 @@ const ribbonTopStyle = (className: string, theme?: Theme) => `
     font-size: 1.3em;
     border-radius: 0 ${theme.borderRadius} ${theme.borderRadius} 0;
     padding: 5px 0;
-    background: ${theme?.secondary};
+    background: ${theme.secondary};
 }
 .${className}:after {
     position: absolute;
@@ -95,7 +95,7 @@ const ribbonTopStyle = (className: string, theme?: Theme) => `
 }
 `;
 
-const ribbonBottomStyle = (className: string, theme?: Theme) => `
+const ribbonBottomStyle = (className: string, theme: Theme) => `
 .${className} {
     position: absolute;
     right: -20px;
@@ -106,7 +106,7 @@ const ribbonBottomStyle = (className: string, theme?: Theme) => `
     font-size: 1.3em;
     border-radius: ${theme.borderRadius} 0 0 ${theme.borderRadius};
     padding: 5px 0;
-    background: ${theme?.primary};
+    background: ${theme.primary};
 }
 .${className}:after {
     position: absolute;
@@ -150,7 +150,10 @@ const getTopRibbonText = (discount: Discount) => {
     return discount?.metadata?.label || undefined;
 };
 
-const createTopRibbon = (discount: Discount, configuration: Configuration) => {
+const createTopRibbon = (
+    discount: Discount,
+    configuration: ResolvedConfiguration,
+) => {
     const text = getTopRibbonText(discount);
     return (
         text &&
@@ -165,7 +168,7 @@ const createTopRibbon = (discount: Discount, configuration: Configuration) => {
 
 const getBottomRibbonText = (
     discount: Discount,
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
 ) => {
     const tStrings = translations[configuration.language];
     if (discount.reward.type === "discount_item_new_price") {
@@ -175,16 +178,12 @@ const getBottomRibbonText = (
     } else if (discount.reward.type === "discount_percent") {
         return `${discount.reward.value}%`;
     } else if (discount.reward.type === "discount_item_quantity") {
-        if (
-            discount.requirement.item.quantity === 3 &&
-            discount.reward.value === 1
-        ) {
+        const require = discount.requirement.item?.quantity ?? 0;
+        if (require === 3 && discount.reward.value === 1) {
             // Show custom 3 for 2 message
             return tStrings.rewards.discount_item_quantity.three_for_two;
         } else {
-            const require = discount.requirement.item.quantity;
-            const payFor =
-                discount.requirement.item.quantity - discount.reward.value;
+            const payFor = require - discount.reward.value;
             return t(tStrings.rewards.discount_item_quantity.generic, {
                 require,
                 payFor,
@@ -205,7 +204,7 @@ const getBottomRibbonText = (
 
 const createBottomRibbon = (
     discount: Discount,
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
 ) => {
     const text = getBottomRibbonText(discount, configuration);
     return (
@@ -224,17 +223,18 @@ const createImage = (discount: Discount) => {
         tag: "div",
         styles: [normalize, imageWrapperStyles],
     });
-    const imageSrc = discount.links.find((link) => [
-        "medium_discount_image",
-        "thumbnail_discount_image".includes(link.rel),
-    ]);
+    const imageSrc = discount.links?.find((link) =>
+        ["medium_discount_image", "thumbnail_discount_image"].includes(
+            link.rel ?? "",
+        ),
+    );
     const image =
         imageSrc &&
         createElement({
             tag: "img",
             attributes: {
                 src: imageSrc.href,
-                alt: discount.name,
+                alt: discount.name ?? "",
                 loading: "lazy",
             },
             styles: [normalize, imageStyle],
@@ -247,7 +247,7 @@ const createImage = (discount: Discount) => {
 
 const createLimitations = (
     discount: Discount,
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
 ) => {
     const tStrings = translations[configuration.language];
 
@@ -257,7 +257,7 @@ const createLimitations = (
     });
 
     const quantity =
-        discount.limitation.discount_reward_usage &&
+        discount.limitation?.discount_reward_usage &&
         discount.limitation.discount_reward_usage !== -1 &&
         createElement({
             tag: "span",
@@ -267,7 +267,7 @@ const createLimitations = (
             }),
         });
     const repeat =
-        discount.limitation.discount_repeat_usage &&
+        discount.limitation?.discount_repeat_usage &&
         discount.limitation.discount_repeat_usage !== -1 &&
         createElement({
             tag: "span",
@@ -301,7 +301,9 @@ const createLimitations = (
                 ),
             }),
         });
-    const children = [quantity, repeat, start, end].filter((child) => child);
+    const children = [quantity, repeat, start, end].filter(
+        (child): child is HTMLElement => Boolean(child),
+    );
     for (const child of children) {
         wrapper.appendChild(child);
     }
@@ -310,7 +312,7 @@ const createLimitations = (
 
 export const createDiscount = (
     discount: Discount,
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
 ): HTMLElement => {
     const discountElem = createElement({
         tag: findWebshopLink(discount) ? "a" : "div",
@@ -348,7 +350,7 @@ export const createDiscount = (
         subtitle,
         description,
         limitations,
-    ].filter((child) => child);
+    ].filter((child): child is HTMLElement => Boolean(child));
     for (const child of children) {
         discountElem.appendChild(child);
     }

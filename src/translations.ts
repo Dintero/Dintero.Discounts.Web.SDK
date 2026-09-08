@@ -21,7 +21,7 @@ const no = {
     },
 };
 
-export const translations = {
+export const translations: Record<string, typeof no> = {
     no,
 };
 
@@ -29,13 +29,13 @@ const findValuesRegex = /(\{\{)[^}]*(\}\})/g;
 // i18n light
 export const t = (
     translateString: string,
-    values?: { [key: string]: string },
+    values?: { [key: string]: string | number },
 ): string => {
     const matches: string[] = translateString.match(findValuesRegex) || [];
     const _values = values || {};
     return matches.reduce<string>((interpolated, match) => {
         const key = match.replace("{{", "").replace("}}", "");
-        const value = _values[key] || "";
+        const value = `${_values[key] || ""}`;
         return interpolated.replace(match, value);
     }, translateString);
 };
