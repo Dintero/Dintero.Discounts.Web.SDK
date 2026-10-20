@@ -1,7 +1,7 @@
 import { createElement } from "./dom";
-import { Configuration, Theme } from "./types";
-import { translations } from "./translations";
 import { normalize } from "./normalize";
+import { translations } from "./translations";
+import type { Configuration, Theme } from "./types";
 
 const errorStyle = (className: string, theme: Theme) => `
 @keyframes appear {

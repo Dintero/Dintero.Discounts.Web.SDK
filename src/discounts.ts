@@ -1,11 +1,11 @@
 import { createElement } from "./dom";
-import { Discount, Configuration, Theme } from "./types";
-import { translations, t } from "./translations";
-import { monetaryString, dateString } from "./formatters";
+import { dateString, monetaryString } from "./formatters";
 import { normalize } from "./normalize";
+import { t, translations } from "./translations";
+import type { Configuration, Discount, Theme } from "./types";
 
 export const findWebshopLink = (discount: Discount) =>
-    discount.links && discount.links.find((x) => x.rel && x.rel === "webshop");
+    discount.links?.find((x) => x.rel && x.rel === "webshop");
 
 const discountStyle = (className: string, theme: Theme) => `
 @keyframes appear {
@@ -147,9 +147,7 @@ const limitationsWrapperStyle = (className: string) => `
 `;
 
 const getTopRibbonText = (discount: Discount) => {
-    return (
-        (discount && discount.metadata && discount.metadata.label) || undefined
-    );
+    return discount?.metadata?.label || undefined;
 };
 
 const createTopRibbon = (discount: Discount, configuration: Configuration) => {
@@ -175,7 +173,7 @@ const getBottomRibbonText = (
             variant: "short",
         });
     } else if (discount.reward.type === "discount_percent") {
-        return discount.reward.value + "%";
+        return `${discount.reward.value}%`;
     } else if (discount.reward.type === "discount_item_quantity") {
         if (
             discount.requirement.item.quantity === 3 &&
@@ -200,7 +198,7 @@ const getBottomRibbonText = (
         );
         return t(tStrings.rewards.discount_amount, { monetaryAmount });
     } else if (discount.reward.type === "discount_item_percent") {
-        return discount.reward.value + "%";
+        return `${discount.reward.value}%`;
     }
     return "";
 };
@@ -304,7 +302,9 @@ const createLimitations = (
             }),
         });
     const children = [quantity, repeat, start, end].filter((child) => child);
-    children.forEach((child) => wrapper.appendChild(child));
+    for (const child of children) {
+        wrapper.appendChild(child);
+    }
     return wrapper;
 };
 
@@ -349,6 +349,8 @@ export const createDiscount = (
         description,
         limitations,
     ].filter((child) => child);
-    children.forEach((child) => discountElem.appendChild(child));
+    for (const child of children) {
+        discountElem.appendChild(child);
+    }
     return discountElem;
 };

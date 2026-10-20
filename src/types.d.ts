@@ -596,7 +596,7 @@ export type Configuration = {
     discounts?: Discount[];
 };
 
-type TokenResponse = {
+export type TokenResponse = {
     access_token: string;
     token_type: string;
 };

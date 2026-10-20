@@ -1,8 +1,8 @@
-import { Theme } from "./types";
+import type { Theme } from "./types";
 
 type CreateElementOptions = {
     tag: string;
-    attributes?: { [key: string]: any };
+    attributes?: { [key: string]: string };
     styles?: ((className: string, theme?: Theme) => string)[];
     handlers?: { [key: string]: EventListenerOrEventListenerObject };
     innerHTML?: string;
@@ -29,14 +29,14 @@ export const createElement = (options: CreateElementOptions) => {
 const addClass = (elem: HTMLElement, className: string) => {
     const names = elem.className.split(" ");
     if (!names.includes(className)) {
-        elem.className = elem.className + " " + className;
+        elem.className = `${elem.className} ${className}`;
     }
 };
 
 const hash = (input: string) => {
     let hash = 0;
-    for (var i = 0; i < input.length; i++) {
-        var char = input.charCodeAt(i);
+    for (let i = 0; i < input.length; i++) {
+        const char = input.charCodeAt(i);
         hash = (hash << 5) - hash + char;
         hash = hash & hash;
     }
@@ -51,8 +51,7 @@ const addStyles = (
     // "styled components" light
     styles.forEach((cssFn) => {
         // get class name from hash
-        const className =
-            "dintero-deals-" + hash(cssFn("dintero-deals", theme));
+        const className = `dintero-deals-${hash(cssFn("dintero-deals", theme))}`;
         addClass(elem, className);
         // add style tag to DOM if not exists
         const hit = document.querySelector(`[data-css-hash=${className}]`);

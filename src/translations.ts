@@ -29,7 +29,7 @@ const findValuesRegex = /(\{\{)[^}]*(\}\})/g;
 // i18n light
 export const t = (
     translateString: string,
-    values?: { [key: string]: any },
+    values?: { [key: string]: string },
 ): string => {
     const matches: string[] = translateString.match(findValuesRegex) || [];
     const _values = values || {};

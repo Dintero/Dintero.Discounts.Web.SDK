@@ -1,11 +1,11 @@
+import pkg from "../package.json";
 import { createDiscount, findWebshopLink } from "./discounts";
-import { Discount, Configuration, Theme, Embed } from "./types";
 import { createElement } from "./dom";
-import { fetchDiscounts } from "./fetch";
 import { createError } from "./error";
+import { fetchDiscounts } from "./fetch";
 import { createLoading } from "./loading";
 import { normalize } from "./normalize";
-import pkg from "../package.json";
+import type { Configuration, Discount, Embed, Theme } from "./types";
 
 const defaultConfig: Partial<Configuration> = {
     language: "no",
@@ -70,7 +70,7 @@ const wrapperStyles = (className: string, theme: Theme) => `
 
 export const embed = async (configuration: Configuration): Promise<Embed> => {
     const _configuration = mergeConfig(defaultConfig, configuration);
-    if (!_configuration.container || !_configuration.container.appendChild) {
+    if (!_configuration.container?.appendChild) {
         console.error("Invalid configuration");
         throw new Error("Invalid configuration");
     }
@@ -83,7 +83,7 @@ export const embed = async (configuration: Configuration): Promise<Embed> => {
             const discounts = await fetchDiscounts(_configuration);
             _configuration.container.removeChild(loader);
             return renderDeals(_configuration, discounts);
-        } catch (error) {
+        } catch (_error) {
             configuration.container.removeChild(loader);
             const errorMessage = createError(_configuration);
             _configuration.container.appendChild(errorMessage);

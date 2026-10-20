@@ -170,8 +170,7 @@ All major modern browsers above version `N - 1`, where `N` is the most recent ve
 ## Building from source
 
 ```bash
-yarn install
-yarn run build
+make build
 ```
 
 ### Creating a new release

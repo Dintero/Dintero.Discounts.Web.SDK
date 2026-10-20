@@ -1,4 +1,4 @@
-import { Configuration, Discount, TokenResponse } from "./types";
+import type { Configuration, Discount, TokenResponse } from "./types";
 
 const createHeaders = (
     keyValues: { [key: string]: string },
