@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import * as discounts from "../src";
-import { Discount } from "../src/types";
+import type { Discount } from "../src/types";
 
 const discount: Discount = {
     id: "148cee10-6dd5-42e2-9496-1fb20a44998d",

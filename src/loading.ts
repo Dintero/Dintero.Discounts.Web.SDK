@@ -1,8 +1,8 @@
 import { createElement } from "./dom";
-import { Configuration, Theme } from "./types";
 import { normalize } from "./normalize";
+import type { Configuration, Theme } from "./types";
 
-const loadingStyle = (className: string, theme: Theme) => `
+const loadingStyle = (className: string, _theme: Theme) => `
 .${className} {
   margin: 10px auto;
   display: block;

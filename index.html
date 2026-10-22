@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
     <head>
         <title>Embed demo</title>
         <meta
@@ -118,12 +118,12 @@
         <script type="text/javascript">
             window.addEventListener(
                 "message",
-                function (event) {
+                (event) => {
                     console.log("embed received message", event);
                 },
                 false,
             );
-            function changeBackground() {
+            function _changeBackground() {
                 if (document.body.className === "color") {
                     document.body.className = "";
                 } else {
@@ -140,7 +140,7 @@
         <div class="main">
             <h1>Mock for embed</h1>
             <div class="mb-10">
-                <label class="switch">
+                <label class="switch" aria-label="Change background color">
                     <input
                         id="checkbox"
                         onchange="changeBackground()"

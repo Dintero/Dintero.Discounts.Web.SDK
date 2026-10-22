@@ -1,4 +1,4 @@
-import { Configuration } from "./types";
+import type { Configuration } from "./types";
 
 export const monetaryString = (
     amount: number,
@@ -15,19 +15,19 @@ export const monetaryString = (
     const beforeDot = amountString.slice(0, dotIndex) || "0";
     const afterDot = amountString.slice(dotIndex);
     const exponentAmount =
-        afterDot == "00" && !opt.decimal
+        afterDot === "00" && !opt.decimal
             ? beforeDot
-            : beforeDot + "." + afterDot;
+            : `${beforeDot}.${afterDot}`;
     if (opt.variant === "short" && afterDot === "00") {
-        return beforeDot + ",-";
+        return `${beforeDot},-`;
     }
     if (!opt.currency) {
         return exponentAmount;
     }
     if (configuration.currency.position === "prefix") {
-        return configuration.currency.value + " " + exponentAmount;
+        return `${configuration.currency.value} ${exponentAmount}`;
     }
-    return exponentAmount + " " + configuration.currency.value;
+    return `${exponentAmount} ${configuration.currency.value}`;
 };
 
 const padZero = (value: number) => {
@@ -47,7 +47,7 @@ export const dateString = (isoString: string, configuration: Configuration) => {
             return [dd, mm, yyyy].join(".");
         }
         return new Intl.DateTimeFormat().format(date);
-    } catch (e) {
+    } catch (_e) {
         return isoString.substr(0, 10);
     }
 };
