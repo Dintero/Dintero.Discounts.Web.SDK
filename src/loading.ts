@@ -1,6 +1,6 @@
 import { createElement } from "./dom";
 import { normalize } from "./normalize";
-import type { Configuration, Theme } from "./types";
+import type { ResolvedConfiguration, Theme } from "./types";
 
 const loadingStyle = (className: string, _theme: Theme) => `
 .${className} {
@@ -32,7 +32,9 @@ const loadingStyle = (className: string, _theme: Theme) => `
 }
 `;
 
-export const createLoading = (configuration: Configuration): HTMLElement => {
+export const createLoading = (
+    configuration: ResolvedConfiguration,
+): HTMLElement => {
     const errorElem = createElement({
         tag: "div",
         styles: [normalize, loadingStyle],

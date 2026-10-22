@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/dintero/Dintero.Discounts.Web.SDK/workflows/CI/badge.svg)](https://github.com/dintero/Dintero.Discounts.Web.SDK/actions?query=workflow%3ACI+branch%3Amaster) [![npm latest version](https://img.shields.io/npm/v/@dintero/discounts-web-sdk/latest.svg)](https://www.npmjs.com/package/@dintero/discounts-web-sdk)
 
-Use this SDK in your frontend application to embed one or more discounts from the Dintero Discount Service service in your webpage.
+Use this SDK in your frontend application to embed one or more discounts from the Dintero Discount Service in your webpage.
 
 [Learn more about the Dintero Discount Service at docs.dintero.com](https://docs.dintero.com/docs/discount-service/)
 
@@ -14,6 +14,34 @@ Use this SDK in your frontend application to embed one or more discounts from th
 npm install @dintero/discounts-web-sdk
 ```
 
+## Usage
+
+**With a bundler**
+
+```js
+import { embed } from "@dintero/discounts-web-sdk";
+
+embed({
+    container: document.getElementById("deals-container"),
+    api: {
+        account: "P00000000",
+        key: "public_api_key",
+        secret: "abcdef01-2345-6789-abcd-ef0123456789",
+    },
+});
+```
+
+**With a script tag**
+
+The package includes a UMD build, `dist/dintero-discounts-web-sdk.umd.min.js`, that exposes the SDK as the
+global `discounts`. Copy it from `node_modules/@dintero/discounts-web-sdk/dist/` into your static assets and
+include it before calling `discounts.embed`, as in the examples below.
+
+```html
+<div id="deals-container"></div>
+<script src="/assets/dintero-discounts-web-sdk.umd.min.js"></script>
+```
+
 ### Inline HTML JavaScript example getting a list of discounts with API access
 
 In this example the SDK will try to fetch data from the discount service.
@@ -23,7 +51,6 @@ Make sure to configure the plugin with an API client that only has grants giving
 
 ```html
 <script type="text/javascript">
-    const container = document.getElementById("checkout-container");
     discounts.embed({
         container: document.getElementById("deals-container"),
         api: {
@@ -42,7 +69,7 @@ Make sure to configure the plugin with an API client that only has grants giving
 </script>
 ```
 
-### Inline HTML JavaScript example getting a single discounts with API access
+### Inline HTML JavaScript example getting a single discount with API access
 
 In this example the SDK will try to fetch data from the discount service for a given `discountId`.
 
@@ -50,7 +77,6 @@ Make sure to configure the plugin with an API client that only has grants giving
 
 ```html
 <script type="text/javascript">
-    const container = document.getElementById("checkout-container");
     discounts.embed({
         container: document.getElementById("deals-container"),
         api: {
@@ -76,7 +102,6 @@ In this example the SDK is supplied with a list of discount objects directly.
 
 ```html
 <script type="text/javascript">
-    const container = document.getElementById("checkout-container");
     discounts.embed({
         container: document.getElementById("deals-container"),
         theme: {
@@ -96,7 +121,7 @@ In this example the SDK is supplied with a list of discount objects directly.
                     customer: {},
                     store_ids: ["*"],
                     purchase_to: "2030-06-13T21:59:00Z",
-                    purchase_from: "2080-06-06T22:00:00Z",
+                    purchase_from: "2030-06-06T22:00:00Z",
                 },
                 limitation: {},
                 reward: { type: "discount_item_new_price", value: 5000 },
@@ -135,14 +160,13 @@ The behaviour of opening links can be adjusted using `linkTarget` in the configu
 
 ```html
 <script type="text/javascript">
-    const container = document.getElementById("checkout-container");
     discounts.embed({
         container: document.getElementById("deals-container"),
-        linkTarget: '_blank'
-        api:{
-            account: 'P00000000',
-            key: 'public_api_key',
-            secret: 'abcdef01-2345-6789-abcd-ef0123456789',
+        linkTarget: "_blank",
+        api: {
+            account: "P00000000",
+            key: "public_api_key",
+            secret: "abcdef01-2345-6789-abcd-ef0123456789",
         },
         theme: {
             fontSize: "14px",
@@ -150,7 +174,7 @@ The behaviour of opening links can be adjusted using `linkTarget` in the configu
             primary: "hotpink",
             secondary: "aqua",
             background: "#fff",
-        }
+        },
     });
 </script>
 ```
@@ -169,8 +193,14 @@ All major modern browsers above version `N - 1`, where `N` is the most recent ve
 
 ## Building from source
 
+Requires Node.js and [pnpm](https://pnpm.io/installation) (the version is pinned in the `packageManager`
+field of `package.json`).
+
 ```bash
-make build
+make build   # type check and build to dist/
+make test    # run tests
+make lint    # run biome checks
+make watch   # rebuild on changes
 ```
 
 ### Creating a new release

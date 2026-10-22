@@ -7,16 +7,47 @@
     "umd:main": "dist/dintero-discounts-web-sdk.umd.min.js",
     "unpkg": "dist/dintero-discounts-web-sdk.umd.min.js",
     "types": "dist/dintero-discounts-web-sdk.cjs.d.ts",
-    "preconstruct": {
-        "umdName": "discounts"
+    "files": [
+        "dist",
+        "LISENCE"
+    ],
+    "tsdown": {
+        "suppressWarnings": [
+            "TypeScript 7.0 does not yet have a stable API"
+        ],
+        "hash": false,
+        "outputOptions": {
+            "entryFileNames": "[name].js"
+        },
+        "format": {
+            "cjs": {
+                "entry": {
+                    "dintero-discounts-web-sdk.cjs": "src/index.ts"
+                },
+                "dts": true
+            },
+            "esm": {
+                "entry": {
+                    "dintero-discounts-web-sdk.esm": "src/index.ts"
+                }
+            },
+            "umd": {
+                "entry": {
+                    "dintero-discounts-web-sdk.umd.min": "src/index.ts"
+                },
+                "globalName": "discounts",
+                "minify": true,
+                "sourcemap": true
+            }
+        }
     },
     "scripts": {
-        "test": "vitest --dom",
-        "watch": "preconstruct watch",
-        "build": "preconstruct build",
+        "build": "tsc --noEmit && tsdown",
         "lint": "biome check",
-        "prepublishOnly": "pnpm run build",
-        "semantic-release": "semantic-release"
+        "test": "vitest --dom",
+        "watch": "tsdown --watch",
+        "semantic-release": "semantic-release",
+        "prepublishOnly": "pnpm run build"
     },
     "private": false,
     "repository": {
@@ -32,13 +63,11 @@
     },
     "devDependencies": {
         "@biomejs/biome": "2.5.15",
-        "@babel/core": "7.29.7",
-        "@babel/preset-typescript": "7.29.7",
-        "@preconstruct/cli": "2.9.0",
         "@semantic-release/git": "11.0.1",
         "happy-dom": "20.14.6",
         "semantic-release": "25.0.9",
-        "typescript": "6.0.3",
+        "tsdown": "0.23.1",
+        "typescript": "7.0.2",
         "vite": "8.3.4",
         "vitest": "5.0.4"
     }

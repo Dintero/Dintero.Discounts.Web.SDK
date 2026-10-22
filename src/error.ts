@@ -1,7 +1,7 @@
 import { createElement } from "./dom";
 import { normalize } from "./normalize";
 import { translations } from "./translations";
-import type { Configuration, Theme } from "./types";
+import type { ResolvedConfiguration, Theme } from "./types";
 
 const errorStyle = (className: string, theme: Theme) => `
 @keyframes appear {
@@ -37,7 +37,9 @@ const errorStyle = (className: string, theme: Theme) => `
 }
 `;
 
-export const createError = (configuration: Configuration): HTMLElement => {
+export const createError = (
+    configuration: ResolvedConfiguration,
+): HTMLElement => {
     const tString = translations[configuration.language];
     const errorElem = createElement({
         tag: "div",

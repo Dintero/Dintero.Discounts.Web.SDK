@@ -3,7 +3,7 @@ import type { Theme } from "./types";
 type CreateElementOptions = {
     tag: string;
     attributes?: { [key: string]: string };
-    styles?: ((className: string, theme?: Theme) => string)[];
+    styles?: ((className: string, theme: Theme) => string)[];
     handlers?: { [key: string]: EventListenerOrEventListenerObject };
     innerHTML?: string;
     theme?: Theme;
@@ -45,19 +45,20 @@ const hash = (input: string) => {
 
 const addStyles = (
     elem: HTMLElement,
-    styles: ((className: string, theme?: Theme) => string)[],
+    styles: ((className: string, theme: Theme) => string)[],
     theme: Theme | undefined,
 ) => {
     // "styled components" light
+    const resolvedTheme = theme ?? {};
     styles.forEach((cssFn) => {
         // get class name from hash
-        const className = `dintero-deals-${hash(cssFn("dintero-deals", theme))}`;
+        const className = `dintero-deals-${hash(cssFn("dintero-deals", resolvedTheme))}`;
         addClass(elem, className);
         // add style tag to DOM if not exists
         const hit = document.querySelector(`[data-css-hash=${className}]`);
         if (!hit) {
             const style = document.createElement("style");
-            style.innerHTML = cssFn(className, theme);
+            style.innerHTML = cssFn(className, resolvedTheme);
             style.setAttribute("data-css-hash", className);
             document.head.appendChild(style);
         }

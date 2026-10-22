@@ -5,9 +5,15 @@ import { createError } from "./error";
 import { fetchDiscounts } from "./fetch";
 import { createLoading } from "./loading";
 import { normalize } from "./normalize";
-import type { Configuration, Discount, Embed, Theme } from "./types";
+import type {
+    Configuration,
+    Discount,
+    Embed,
+    ResolvedConfiguration,
+    Theme,
+} from "./types";
 
-const defaultConfig: Partial<Configuration> = {
+const defaultConfig: Omit<ResolvedConfiguration, "container"> = {
     language: "no",
     version: pkg?.version || "SNAPSHOT",
     linkTarget: "_self",
@@ -34,9 +40,9 @@ const defaultConfig: Partial<Configuration> = {
 };
 
 const mergeConfig = (
-    a: Partial<Configuration>,
+    a: Omit<ResolvedConfiguration, "container">,
     b: Configuration,
-): Configuration => {
+): ResolvedConfiguration => {
     return {
         ...a,
         ...b,
@@ -97,7 +103,7 @@ export const embed = async (configuration: Configuration): Promise<Embed> => {
 };
 
 const renderDeals = (
-    configuration: Configuration,
+    configuration: ResolvedConfiguration,
     discounts: Discount[],
 ): Embed => {
     const wrapper = createElement({
