@@ -193,8 +193,9 @@ All major modern browsers above version `N - 1`, where `N` is the most recent ve
 
 ## Building from source
 
-Requires Node.js and [pnpm](https://pnpm.io/installation) (the version is pinned in the `packageManager`
-field of `package.json`).
+Requires the latest Node.js LTS (26) and [corepack](https://github.com/nodejs/corepack), which is no longer
+bundled with Node.js: `npm install --global corepack`. The Makefile enables corepack and installs the
+pinned pnpm version from `package.json`.
 
 ```bash
 make build   # type check and build to dist/
@@ -203,9 +204,16 @@ make lint    # run biome checks
 make watch   # rebuild on changes
 ```
 
-### Creating a new release
+Run `make help` to list all targets.
 
-1. Enforce all commits to the master branch to be formatted according to the
-   [Angular Commit Message Format](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format)
-2. When merged to master, it will automatically be released with
-   [semantic-release](https://github.com/semantic-release/semantic-release)
+## Release
+
+Releases are explicit: bump `version` in `package.json` on your branch and include it in the PR:
+
+```bash
+make bump-version              # patch, or BUMP=minor / BUMP=major
+```
+
+When merged to master, the release workflow (`make release`) publishes the package to npm
+and creates the GitHub release/tag `v<version>` with generated release notes.
+If the tag already exists, nothing is released.

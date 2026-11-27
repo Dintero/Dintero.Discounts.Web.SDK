@@ -1,6 +1,6 @@
 {
     "name": "@dintero/discounts-web-sdk",
-    "version": "0.0.0-development",
+    "version": "0.3.20",
     "description": "Dintero Discounts SDK for web frontends",
     "main": "dist/dintero-discounts-web-sdk.cjs.js",
     "module": "dist/dintero-discounts-web-sdk.esm.js",
@@ -8,8 +8,7 @@
     "unpkg": "dist/dintero-discounts-web-sdk.umd.min.js",
     "types": "dist/dintero-discounts-web-sdk.cjs.d.ts",
     "files": [
-        "dist",
-        "LISENCE"
+        "dist"
     ],
     "tsdown": {
         "suppressWarnings": [
@@ -44,9 +43,8 @@
     "scripts": {
         "build": "tsc --noEmit && tsdown",
         "lint": "biome check",
-        "test": "vitest --dom",
+        "test": "vitest run --dom --dir test",
         "watch": "tsdown --watch",
-        "semantic-release": "semantic-release",
         "prepublishOnly": "pnpm run build"
     },
     "private": false,
@@ -57,18 +55,15 @@
     "homepage": "https://github.com/Dintero/Dintero.Discounts.Web.SDK#readme",
     "author": "Sven Nicolai Viig <sven@dintero.com> (https://dintero.com)",
     "license": "MIT",
-    "packageManager": "pnpm@11.23.0+sha512.f00082e5b283a199b74e079da28d155c008fe232f44c8a06ea7ddfa014ecf719fc362f790ecc67b28106ddac2afb24c49a9a079159da560b2ce7d1e98efd11af",
+    "packageManager": "pnpm@12.24.0+sha512.5f90f50a48aa40f01dc43bd3acb528922fd899d3b909015fdb23af73bb31c578f29ceb29be9a4d6f0146adb34206aac332796043cc5024b815ef76288cbac767",
     "bugs": {
         "url": "https://github.com/Dintero/Dintero.Discounts.Web.SDK/issues"
     },
     "devDependencies": {
         "@biomejs/biome": "2.6.8",
-        "@semantic-release/git": "11.0.1",
         "happy-dom": "21.0.4",
-        "semantic-release": "25.0.9",
         "tsdown": "0.23.7",
         "typescript": "7.0.2",
-        "vite": "8.3.8",
         "vitest": "5.1.0"
     }
 }
